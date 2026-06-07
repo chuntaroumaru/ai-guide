@@ -217,19 +217,34 @@
     <nav id="toc">
       <h2>目次</h2>
       <ul>
-        <li><a href="#sec1">Google Workspace連携</a></li>
-<li><a href="#sec2">超長文コンテキストの処理</a></li>
+        <li><a href="#sec1">超長文コンテキスト（2Mトークン）の活用</a></li>
+<li><a href="#sec2">動画・音声からの情報抽出</a></li>
+<li><a href="#sec3">Gemini Code AssistによるGCP開発</a></li>
+<li><a href="#sec4">Pythonコード実行環境の活用</a></li>
 
       </ul>
     </nav>
 
     
-<h2 class="section-heading" id="sec1">Google Workspace連携</h2>
-<p>Googleドライブ内の特定のドキュメントやスプレッドシートの内容を参照して回答させたり、Gmailのメールを要約させたりする。</p>
+<h2 class="section-heading" id="sec1">超長文コンテキスト（2Mトークン）の活用</h2>
+<p>Gemini 1.5 Proの最大の特徴である200万トークンのコンテキストウィンドウを活用します。これは「英語の小説なら約20冊分」「ソースコードなら数万行」に相当します。</p>
+<p>GitHubからクローンした巨大なOSSプロジェクトのディレクトリ全体、あるいは自社のレガシーシステムのソースコード群を丸ごとZIPで固めて（またはGoogle AI Studio経由で）アップロードし、「このシステムにおいて、ユーザー認証からDBのセッション管理までのデータフローを追跡して解説して」といった指示が可能です。</p>
 <a href="#toc" class="back-to-toc">▲ 目次へ戻る</a>
 
-<h2 class="section-heading" id="sec2">超長文コンテキストの処理</h2>
-<p>プロジェクト全体のソースコード群や、数千ページに及ぶログファイルを一度に読み込ませ、特定のエラーパターンやボトルネックを特定させる。</p>
+<h2 class="section-heading" id="sec2">動画・音声からの情報抽出</h2>
+<p>Geminiは動画ファイル（mp4等）や音声ファイルをそのままアップロードし、タイムスタンプ付きで内容を解析できます。システムの操作マニュアル動画や、要件定義の録画データ（Zoomの録画など）の解析に最適です。</p>
+<p><strong>プロンプト例：</strong></p>
+<pre><code>（1時間のシステム操作説明の動画を添付）
+この動画から、ユーザーが「月次締め処理」を行っている箇所（タイムスタンプ）を特定し、その操作手順を箇条書きのテキストマニュアルとして書き起こしてください。
+</code></pre>
+<a href="#toc" class="back-to-toc">▲ 目次へ戻る</a>
+
+<h2 class="section-heading" id="sec3">Gemini Code AssistによるGCP開発</h2>
+<p>Google Cloud環境で開発を行う場合、VS CodeやIntelliJに「Gemini Code Assist」プラグインを導入することで、GitHub Copilotと同様のインライン補完やチャット機能を利用できます。特にGCPのAPI（Cloud Storage, Cloud Run, BigQueryなど）を利用するコードの生成や、IAM権限のトラブルシューティングにおいて、Google公式AIならではの正確さを発揮します。</p>
+<a href="#toc" class="back-to-toc">▲ 目次へ戻る</a>
+
+<h2 class="section-heading" id="sec4">Pythonコード実行環境の活用</h2>
+<p>ブラウザ版のGemini Advancedには、ChatGPTのAdvanced Data Analysisに相当する「Pythonコードの実行環境」が備わっています。複雑な計算やデータプロットを要求すると、GeminiはバックグラウンドでPythonコードを書き、実行し、その結果（グラフやCSV）を返します。</p>
 <a href="#toc" class="back-to-toc">▲ 目次へ戻る</a>
 
   </main>

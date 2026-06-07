@@ -217,19 +217,37 @@
     <nav id="toc">
       <h2>目次</h2>
       <ul>
-        <li><a href="#sec1">基本的なタスク依頼</a></li>
-<li><a href="#sec2">ブラウザ操作の自動化</a></li>
+        <li><a href="#sec1">オープンエンドな指示の出し方</a></li>
+<li><a href="#sec2">得意なタスクとユースケース</a></li>
+<li><a href="#sec3">成果物の受け取り方</a></li>
+<li><a href="#sec4">やってはいけない指示</a></li>
 
       </ul>
     </nav>
 
     
-<h2 class="section-heading" id="sec1">基本的なタスク依頼</h2>
-<p>「特定のトピックについてWebで調査し、レポートをマークダウン形式でまとめて」といった、明確なゴールを持つタスクを依頼する。</p>
+<h2 class="section-heading" id="sec1">オープンエンドな指示の出し方</h2>
+<p>Manusには、手順を一つ一つ教える必要はありません。「最終的に何が欲しいか（Goal）」を明確に伝えます。</p>
+<p><strong>悪い例：</strong>「PythonでRequestsライブラリをインストールして。次にURLにアクセスして...」</p>
+<p><strong>良い例：</strong>「厚生労働省のサイトから最新の『医療施設動態調査』のExcelデータをダウンロードし、都道府県別の病床数を集計して、見やすい棒グラフ（PNG形式）を作成してください。」</p>
 <a href="#toc" class="back-to-toc">▲ 目次へ戻る</a>
 
-<h2 class="section-heading" id="sec2">ブラウザ操作の自動化</h2>
-<p>指定したWebサイトにアクセスし、必要な情報を抽出したり、フォームへの入力を行わせたりする。</p>
+<h2 class="section-heading" id="sec2">得意なタスクとユースケース</h2>
+<ul>
+  <li><strong>情報収集とレポート作成</strong>：複数サイトを検索・閲覧し、事実確認を行った上で、MarkdownやPDFのレポートを作成する。</li>
+  <li><strong>データクレンジング</strong>：表記揺れのあるCSVデータをPythonで整形し、クリーンなデータセットを出力する。</li>
+  <li><strong>ドキュメント変換</strong>：Markdownで書かれた仕様書を、見栄えの良いHTMLやPDF、スライド（PPTX）に変換する。</li>
+</ul>
+<a href="#toc" class="back-to-toc">▲ 目次へ戻る</a>
+
+<h2 class="section-heading" id="sec3">成果物の受け取り方</h2>
+<p>Manusはサンドボックス内で作業を行うため、生成されたファイル（PDF、画像、CSVなど）は、最終的にManusからのメッセージの「添付ファイル」として受け取ります。プロンプト内で「結果はファイルに保存して添付してください」と明示すると確実です。</p>
+<a href="#toc" class="back-to-toc">▲ 目次へ戻る</a>
+
+<h2 class="section-heading" id="sec4">やってはいけない指示</h2>
+<div class="callout danger">
+  <strong>🚫 Danger:</strong> Manusのサンドボックスはタスク終了時（または一定時間の非アクティブ状態）に初期化・破棄される可能性があります。「データベースサーバーを立ち上げて、ずっと稼働させておいて」といった、永続的なバックグラウンドプロセスの実行を要求するタスクには適していません。（※別途「Persistent Computing」環境が提供されている場合を除く）
+</div>
 <a href="#toc" class="back-to-toc">▲ 目次へ戻る</a>
 
   </main>

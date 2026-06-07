@@ -217,19 +217,47 @@
     <nav id="toc">
       <h2>目次</h2>
       <ul>
-        <li><a href="#sec1">エージェントモードの活用</a></li>
-<li><a href="#sec2">ワークスペース全体の理解と操作</a></li>
+        <li><a href="#sec1">Copilot Workspaceによるタスク駆動開発</a></li>
+<li><a href="#sec2">大規模リファクタリング戦略</a></li>
+<li><a href="#sec3">独自ルール（Custom Instructions）の適用</a></li>
+<li><a href="#sec4">セキュリティとプライバシーの管理</a></li>
 
       </ul>
     </nav>
 
     
-<h2 class="section-heading" id="sec1">エージェントモードの活用</h2>
-<p>Copilot Agent Modeを使用し、複数ファイルにまたがる複雑なタスク（例：「データベース接続のライブラリをAからBに移行する」）を自律的に実行させる。</p>
+<h2 class="section-heading" id="sec1">Copilot Workspaceによるタスク駆動開発</h2>
+<p>Copilot Workspaceは、単一ファイルの補完を超え、GitHub Issueから直接コードの変更計画（Plan）を作成し、複数ファイルにまたがる実装を一気に生成する機能です。</p>
+<ol>
+  <li>GitHub Issueに「Oracleの在庫テーブル参照処理をSQL Server向けに移行し、Dapperで実装する」といった要件を記述する。</li>
+  <li>WorkspaceでIssueを開くと、AIが現状のコードベースを解析し、変更すべきファイルと修正内容の計画（Plan）を提示する。</li>
+  <li>エンジニアが計画をレビュー・修正し、実行（Implement）させると、複数ファイルの差分（Diff）が生成される。</li>
+  <li>内容を確認し、直接Pull Requestを作成する。</li>
+</ol>
+<p>これにより、設計レベルの指示から実装までをシームレスに繋ぐことができます。</p>
 <a href="#toc" class="back-to-toc">▲ 目次へ戻る</a>
 
-<h2 class="section-heading" id="sec2">ワークスペース全体の理解と操作</h2>
-<p>`@workspace`を利用して、プロジェクト全体の構造や依存関係に基づいた質問やコード生成を行う。</p>
+<h2 class="section-heading" id="sec2">大規模リファクタリング戦略</h2>
+<p>VB.NETからC#への全面移行や、モノリスからマイクロサービスへの分割など、大規模なリファクタリングにおいてCopilotを活用する戦略です。</p>
+<ul>
+  <li><strong>段階的移行</strong>：一気に全体を変換するのではなく、ドメインモデル（Entity）→ データアクセス層（Repository）→ ビジネスロジック（Service）の順に、コンテキストを絞りながら変換を指示します。</li>
+  <li><strong>インターフェース主導</strong>：先にC#でモダンなインターフェースを定義し、そのインターフェースを実装する形でVB.NETの旧ロジックを移植するよう指示すると、アーキテクチャの改善とコード変換を同時に行えます。</li>
+</ul>
+<a href="#toc" class="back-to-toc">▲ 目次へ戻る</a>
+
+<h2 class="section-heading" id="sec3">独自ルール（Custom Instructions）の適用</h2>
+<p>プロジェクトのルートディレクトリに <code>.github/copilot-instructions.md</code> などの設定ファイルを配置し、Copilotにプロジェクト固有のコーディング規約やアーキテクチャのルールを強制します。</p>
+<pre><code># プロジェクト規約
+- データベースへのアクセスは直接 `DbContext` を触らず、必ず `IRepository&lt;T&gt;` を経由すること。
+- 日付と時刻はすべて `DateTimeOffset` を使用し、ローカル時間は使用しないこと。
+- 変数名はキャメルケース、メソッド名はパスカルケースを厳守すること。
+</code></pre>
+<p>これにより、生成されるコードが最初から社内標準に準拠する確率が大幅に高まります。</p>
+<a href="#toc" class="back-to-toc">▲ 目次へ戻る</a>
+
+<h2 class="section-heading" id="sec4">セキュリティとプライバシーの管理</h2>
+<p>業務システムのソースコードを扱う以上、セキュリティ設定の理解は必須です。GitHub Copilot Business / Enterprise エディションでは、組織の管理者が「ユーザーのコードスニペットをOpenAIのモデル学習に使用させない」設定を強制できます。</p>
+<p>また、機密情報（APIキーやパスワード）を含むファイルを開いている場合、その内容がコンテキストとして送信される可能性があるため、<code>.copilotignore</code> （または類似の機能）を使用して、特定のファイルやディレクトリをCopilotの解析対象から除外する運用を徹底する必要があります。</p>
 <a href="#toc" class="back-to-toc">▲ 目次へ戻る</a>
 
   </main>

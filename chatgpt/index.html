@@ -217,27 +217,54 @@
     <nav id="toc">
       <h2>目次</h2>
       <ul>
-        <li><a href="#sec1">ChatGPTの概要</a></li>
-<li><a href="#sec2">対象読者と活用方針</a></li>
-<li><a href="#sec3">各レベルの案内</a></li>
+        <li><a href="#sec1">ChatGPTの基本アーキテクチャ</a></li>
+<li><a href="#sec2">業務システム開発における位置づけ</a></li>
+<li><a href="#sec3">モデルの選定基準 (2026年最新版)</a></li>
+<li><a href="#sec4">各レベルの学習ロードマップ</a></li>
 
       </ul>
     </nav>
 
     
-<h2 class="section-heading" id="sec1">ChatGPTの概要</h2>
-<p>OpenAIが提供する汎用対話型AI。GPT-4o、o3、GPT-5系列のモデルを利用可能。推論能力やコーディング支援に優れ、業務システム開発における要件定義の壁打ち、コードのレビュー、SQLの最適化など多岐にわたる用途で活用できる。</p>
+<h2 class="section-heading" id="sec1">ChatGPTの基本アーキテクチャ</h2>
+<p>ChatGPTはOpenAIが提供する大規模言語モデル(LLM)のインターフェースです。2026年現在、GPT-4o、o3、o4-mini、GPT-5系列といった複数のモデルが提供されており、それぞれ得意分野が異なります。</p>
+<p>内部的には、プロンプトとして入力されたテキストに対して、確率的に最も適切な次の単語（トークン）を予測し続ける仕組みです。そのため、「正解」を検索して返すのではなく、「文脈的に妥当な文字列」を生成しています。この特性を理解することが、幻覚（ハルシネーション）を防ぎ、業務で安全に活用するための第一歩となります。</p>
 <a href="#toc" class="back-to-toc">▲ 目次へ戻る</a>
 
-<h2 class="section-heading" id="sec2">対象読者と活用方針</h2>
-<p>VBA/VB.NET/C#/SQL Server/Oracleに精通したシステムエンジニアにとって、ChatGPTは単なる「検索の代替」ではなく、「ペアプログラマー」や「設計の壁打ち相手」として機能する。特に、習得中のC#やSQL ServerのT-SQLにおけるベストプラクティスの学習や、レガシーコード（VB6.0/VBA）からモダンな言語への移行支援において強力な武器となる。</p>
+<h2 class="section-heading" id="sec2">業務システム開発における位置づけ</h2>
+<p>35年の業務システム開発経験を持つエンジニアにとって、ChatGPTは「コードスニペットの検索ツール」にとどまりません。その真価は<strong>「高度な壁打ち相手」</strong>および<strong>「レガシーコードの翻訳機」</strong>にあります。</p>
+<p>VBAやVB6.0で書かれた数千行のレガシーコードをC#やVB.NETに移行する際、単なる構文変換ではなく、アーキテクチャの刷新（例：イベント駆動からMVVMへの移行、ADOからEntity Framework Coreへの移行）を伴う設計レベルの相談が可能です。</p>
 <a href="#toc" class="back-to-toc">▲ 目次へ戻る</a>
 
-<h2 class="section-heading" id="sec3">各レベルの案内</h2>
+<h2 class="section-heading" id="sec3">モデルの選定基準 (2026年最新版)</h2>
+<p>用途に応じて適切なモデルを選択することが、コストとパフォーマンスの最適化に直結します。</p>
+<table>
+  <tr>
+    <th>モデル名</th>
+    <th>特徴</th>
+    <th>推奨ユースケース</th>
+  </tr>
+  <tr>
+    <td><strong>o3 / o4-mini (推論モデル)</strong></td>
+    <td>回答前に内部で深い推論（Chain of Thought）を行う。出力まで時間はかかるが論理的整合性が極めて高い。</td>
+    <td>複雑なアルゴリズムの設計、難解なバグの解析、レガシーシステムの仕様リバースエンジニアリング</td>
+  </tr>
+  <tr>
+    <td><strong>GPT-4o / GPT-5.5</strong></td>
+    <td>高速かつマルチモーダル（画像・音声）に対応。推論能力も高いが、o3系列ほど深くは考えない。</td>
+    <td>日常的なコーディング支援、APIドキュメントの要約、正規表現の生成、画像からのUI要件抽出</td>
+  </tr>
+</table>
+<div class="callout tip">
+  <strong>💡 Tip:</strong> 複雑なSQL（例えばOracleの階層問い合わせ `CONNECT BY` をSQL Serverの `CTE` に変換する等）を依頼する場合は、o3モデルを選択すると一発で正確なクエリが得られる確率が跳ね上がります。
+</div>
+<a href="#toc" class="back-to-toc">▲ 目次へ戻る</a>
+
+<h2 class="section-heading" id="sec4">各レベルの学習ロードマップ</h2>
 <ul>
-  <li><strong>初級編</strong>：基本的な使い方、プロンプトの書き方、典型的なユースケース（コード解説、エラー解析）</li>
-  <li><strong>中級編</strong>：効果的なプロンプト設計、システム設計時の壁打ち、他ツールとの使い分け</li>
-  <li><strong>上級編</strong>：API連携・自動化、エージェント活用、業務システム開発への応用（データ変換スクリプトの自動生成など）</li>
+  <li><strong>初級編</strong>：ChatGPTの基本的な特性を理解し、日常的なコーディングの疑問解決やエラー解析、簡単なコード変換（VBA → VB.NET）を正確に行わせるプロンプト技術を習得します。</li>
+  <li><strong>中級編</strong>：要件定義やデータベース設計における「壁打ち」手法、長文の仕様書解析、セキュリティやパフォーマンスを考慮したコードレビューの自動化手法を学びます。</li>
+  <li><strong>上級編</strong>：OpenAI APIを利用した業務システムへの組み込み、Function Callingを用いた自律的エージェントの構築、RAG（Retrieval-Augmented Generation）による社内ドキュメント検索システムの設計を解説します。</li>
 </ul>
 <a href="#toc" class="back-to-toc">▲ 目次へ戻る</a>
 

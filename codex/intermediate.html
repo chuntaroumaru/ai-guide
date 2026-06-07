@@ -217,19 +217,54 @@
     <nav id="toc">
       <h2>目次</h2>
       <ul>
-        <li><a href="#sec1">ローカルコードベースの操作</a></li>
-<li><a href="#sec2">一括リファクタリング</a></li>
+        <li><a href="#sec1">コンテキストの提供手法</a></li>
+<li><a href="#sec2">レガシーコードのモダン化</a></li>
+<li><a href="#sec3">テストコードの自動生成</a></li>
+<li><a href="#sec4">正規表現とパーサーの実装</a></li>
 
       </ul>
     </nav>
 
     
-<h2 class="section-heading" id="sec1">ローカルコードベースの操作</h2>
-<p>プロジェクト全体のコンテキストを読み込ませ、特定の要件に基づいたコードの追加や修正を依頼する。ファイル間の依存関係を考慮した変更が可能。</p>
+<h2 class="section-heading" id="sec1">コンテキストの提供手法</h2>
+<p>Codexから精度の高いコードを引き出すには、対象の関数だけでなく、それが依存するクラスやインターフェースの定義（コンテキスト）をプロンプトに含める必要があります。</p>
+<p>例えば、特定のリポジトリインターフェースを実装するクラスを生成させる場合、インターフェースの定義を先頭に配置します。</p>
+<pre><code>// 依存するインターフェース
+public interface IPatientRepository {
+    Task&lt;Patient?&gt; GetByIdAsync(int patientId);
+    Task&lt;IEnumerable&lt;Patient&gt;&gt; GetActivePatientsAsync();
+}
+
+// 上記インターフェースを実装し、Dapperを使用してSQL Serverにアクセスする
+// PatientRepositoryクラスを実装してください。
+public class PatientRepository : IPatientRepository {
+</code></pre>
 <a href="#toc" class="back-to-toc">▲ 目次へ戻る</a>
 
-<h2 class="section-heading" id="sec2">一括リファクタリング</h2>
-<p>古い命名規約（例：ハンガリアン記法）から新しい命名規約（例：camelCaseやPascalCase）への一括変換スクリプトを作成・実行させる。</p>
+<h2 class="section-heading" id="sec2">レガシーコードのモダン化</h2>
+<p>VB6.0やVBAのコードをC#に変換する際、単なる直訳ではなく、最新の言語機能を活用したモダンなコードへのリファクタリングを指示します。</p>
+<pre><code>以下のVB6.0のコードをC# (.NET 8) に変換してください。
+変換時の要件：
+- ADODBは使用せず、Entity Framework CoreまたはDapperを使用すること。
+- On Error GoTo は使用せず、適切な try-catch ブロックに置き換えること。
+- コレクションの操作にはLINQを使用すること。
+- 変数名はcamelCaseに変更すること。
+</code></pre>
+<a href="#toc" class="back-to-toc">▲ 目次へ戻る</a>
+
+<h2 class="section-heading" id="sec3">テストコードの自動生成</h2>
+<p>実装済みのメソッドを与え、それに対するユニットテスト（xUnit, NUnitなど）を生成させます。正常系だけでなく、エッジケースや異常系のテストも明示的に要求します。</p>
+<pre><code>以下の CalculateDiscount メソッドに対する xUnit テストクラスを生成してください。
+境界値（0円、マイナス金額）や、nullが渡された場合の異常系テストも含めてください。
+Moqを使用して依存関係をモック化してください。
+</code></pre>
+<a href="#toc" class="back-to-toc">▲ 目次へ戻る</a>
+
+<h2 class="section-heading" id="sec4">正規表現とパーサーの実装</h2>
+<p>複雑な文字列処理やログファイルのパース処理の実装を依頼します。</p>
+<pre><code>以下の形式のIISアクセスログから、IPアドレス、リクエスト日時、HTTPステータスコードを抽出するC#の正規表現と、それを用いてオブジェクトのリストに変換するメソッドを実装してください。
+ログ形式: 2026-05-10 10:00:00 192.168.1.10 GET /api/patients - 200 ...
+</code></pre>
 <a href="#toc" class="back-to-toc">▲ 目次へ戻る</a>
 
   </main>

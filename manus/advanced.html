@@ -217,19 +217,42 @@
     <nav id="toc">
       <h2>目次</h2>
       <ul>
-        <li><a href="#sec1">スキル拡張機構の活用</a></li>
-<li><a href="#sec2">複雑な多段階タスクの設計</a></li>
+        <li><a href="#sec1">GitHub連携と自動デプロイ</a></li>
+<li><a href="#sec2">WebDev Scaffoldによるアプリ構築</a></li>
+<li><a href="#sec3">スケジュール実行と定期タスク</a></li>
+<li><a href="#sec4">外部API・MCPとの連携</a></li>
 
       </ul>
     </nav>
 
     
-<h2 class="section-heading" id="sec1">スキル拡張機構の活用</h2>
-<p>特定の業務フローや外部ツールとの連携方法を定義した「スキル」を作成し、Manusの能力をカスタマイズ・拡張する。</p>
+<h2 class="section-heading" id="sec1">GitHub連携と自動デプロイ</h2>
+<p>ManusはGitHub CLI (`gh`) を標準で利用できます。これを利用して、コードの修正からPRの作成、マージまでを自動化します。</p>
+<pre><code>以下のリポジトリをクローンしてください: `gh repo clone user/repo`
+src/utils/calc.py に存在するバグ（ゼロ除算の可能性）を修正し、テストコードを追加してください。
+修正完了後、新しいブランチを作成し、コミットしてPull Requestを作成してください。
+</code></pre>
 <a href="#toc" class="back-to-toc">▲ 目次へ戻る</a>
 
-<h2 class="section-heading" id="sec2">複雑な多段階タスクの設計</h2>
-<p>「Webから最新の技術動向をスクレイピングし、データベースに格納し、要約レポートを生成してメールで送信する」といった、複数のツールやステップを組み合わせたワークフローを設計・実行させる。</p>
+<h2 class="section-heading" id="sec2">WebDev Scaffoldによるアプリ構築</h2>
+<p>ManusにはWebアプリケーションの雛形（Scaffold）を瞬時に構築する機能（`webdev_init_project`）が備わっています。</p>
+<ul>
+  <li><strong>web-static</strong>: Vite + React + TypeScript + TailwindCSS （LPなどに最適）</li>
+  <li><strong>web-db-user</strong>: 上記に加え、Drizzle ORM + DB + 認証 + S3ストレージ （SaaSのプロトタイプに最適）</li>
+</ul>
+<p>「在庫管理システムのプロトタイプを作りたい。ユーザー認証と、備品一覧のCRUD機能を持つ `web-db-user` 構成でプロジェクトを初期化し、要件に合わせてUIを実装して」と指示するだけで、動くWebアプリが数分で立ち上がります。</p>
+<a href="#toc" class="back-to-toc">▲ 目次へ戻る</a>
+
+<h2 class="section-heading" id="sec3">スケジュール実行と定期タスク</h2>
+<p>Manusの設定ツール（`manus-config`）を利用すると、特定のタスクをcron形式で定期実行させることができます。</p>
+<pre><code># 毎週月曜の朝8時に実行するスケジュールの設定例
+manus-config schedule create   --title "週次競合調査"   --detail "競合他社3社のWebサイトの更新状況をチェックし、差分があればレポートを作成して私に通知してください。"   --cron "0 8 * * 1"   --repeated
+</code></pre>
+<p>これにより、Manusを単なるアシスタントから、24時間365日稼働する「自動化ワーカー」へと昇華させることができます。</p>
+<a href="#toc" class="back-to-toc">▲ 目次へ戻る</a>
+
+<h2 class="section-heading" id="sec4">外部API・MCPとの連携</h2>
+<p>Model Context Protocol (MCP) を利用して、Manusに社内の非公開システムや独自のAPIを操作させることができます。例えば、社内のActive Directoryと連携するMCPサーバーを立てておけば、Manusに「来月入社する新入社員3名のアカウントを作成しておいて」と指示するだけで、セキュアな環境内でプロビジョニングが完了します。</p>
 <a href="#toc" class="back-to-toc">▲ 目次へ戻る</a>
 
   </main>

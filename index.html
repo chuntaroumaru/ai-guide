@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AIツール使いこなし指南 — フリーランスSE向けリファレンス</title>
+  <title>AIツール使いこなし指南 — フリーランスSE向け実践リファレンス</title>
   <style>
     :root {
       --bg: #f8f9fa;
@@ -12,10 +12,6 @@
       --text-muted: #6c757d;
       --border: #dee2e6;
       --accent: #0d6efd;
-      --accent-hover: #0b5ed7;
-      --badge-beginner: #198754;
-      --badge-intermediate: #fd7e14;
-      --badge-advanced: #dc3545;
       --shadow: 0 2px 8px rgba(0,0,0,0.08);
     }
     @media (prefers-color-scheme: dark) {
@@ -26,7 +22,6 @@
         --text-muted: #adb5bd;
         --border: #3d4147;
         --accent: #4d94ff;
-        --accent-hover: #6ba3ff;
         --shadow: 0 2px 8px rgba(0,0,0,0.4);
       }
     }
@@ -35,70 +30,76 @@
       font-family: "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, "Yu Gothic", sans-serif;
       background: var(--bg);
       color: var(--text);
-      line-height: 1.7;
+      line-height: 1.8;
       font-size: 16px;
     }
     header {
       background: var(--bg-card);
       border-bottom: 1px solid var(--border);
-      padding: 24px 32px;
+      padding: 32px;
       box-shadow: var(--shadow);
+      text-align: center;
     }
     header h1 {
-      font-size: 1.6rem;
+      font-size: 1.8rem;
       font-weight: 700;
-      color: var(--accent);
-      letter-spacing: -0.02em;
+      margin-bottom: 8px;
     }
-    header p {
+    header .subtitle {
       color: var(--text-muted);
-      font-size: 0.9rem;
-      margin-top: 4px;
+      font-size: 0.92rem;
     }
     main {
-      max-width: 1100px;
+      max-width: 1000px;
       margin: 0 auto;
-      padding: 40px 24px;
+      padding: 48px 24px;
     }
-    #toc {
+    .intro {
       background: var(--bg-card);
       border: 1px solid var(--border);
       border-radius: 8px;
       padding: 24px 28px;
-      margin-bottom: 40px;
-    }
-    #toc h2 {
-      font-size: 1rem;
-      font-weight: 700;
-      margin-bottom: 12px;
-      color: var(--text-muted);
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-    }
-    #toc ul {
-      list-style: none;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px 24px;
-    }
-    #toc ul li a {
-      color: var(--accent);
-      text-decoration: none;
+      margin-bottom: 48px;
       font-size: 0.95rem;
     }
-    #toc ul li a:hover { text-decoration: underline; }
-    .section-title {
-      font-size: 1.3rem;
+    .intro h2 {
+      font-size: 1rem;
       font-weight: 700;
-      margin-bottom: 20px;
-      padding-bottom: 8px;
-      border-bottom: 2px solid var(--border);
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-bottom: 12px;
     }
+    .intro p { margin-bottom: 10px; }
+    .intro p:last-child { margin-bottom: 0; }
+    .level-legend {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      margin-top: 16px;
+    }
+    .level-legend span {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.85rem;
+    }
+    .badge {
+      display: inline-block;
+      font-size: 0.72rem;
+      font-weight: 700;
+      padding: 2px 8px;
+      border-radius: 4px;
+      color: #fff;
+    }
+    .badge-beginner { background: #198754; }
+    .badge-intermediate { background: #fd7e14; }
+    .badge-advanced { background: #dc3545; }
     .tools-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
       gap: 20px;
-      margin-bottom: 48px;
+      margin-bottom: 56px;
     }
     .tool-card {
       background: var(--bg-card);
@@ -106,227 +107,290 @@
       border-radius: 10px;
       padding: 24px;
       box-shadow: var(--shadow);
-      transition: box-shadow 0.2s;
+      transition: box-shadow 0.2s, transform 0.2s;
     }
-    .tool-card:hover { box-shadow: 0 4px 16px rgba(0,0,0,0.12); }
-    .tool-card h3 {
+    .tool-card:hover {
+      box-shadow: 0 6px 20px rgba(0,0,0,0.12);
+      transform: translateY(-2px);
+    }
+    .tool-card .tool-icon {
+      font-size: 2rem;
+      margin-bottom: 10px;
+    }
+    .tool-card h2 {
       font-size: 1.15rem;
       font-weight: 700;
-      margin-bottom: 8px;
+      margin-bottom: 6px;
     }
-    .tool-card p {
-      font-size: 0.88rem;
+    .tool-card .tool-desc {
+      font-size: 0.85rem;
       color: var(--text-muted);
       margin-bottom: 16px;
       line-height: 1.6;
     }
-    .tool-card .tag {
-      display: inline-block;
-      font-size: 0.72rem;
-      font-weight: 600;
-      padding: 2px 8px;
-      border-radius: 4px;
-      margin-right: 4px;
-      margin-bottom: 12px;
-      color: #fff;
-    }
-    .tag-llm { background: #0d6efd; }
-    .tag-code { background: #6f42c1; }
-    .tag-agent { background: #20c997; }
-    .tag-local { background: #6c757d; }
-    .level-links {
+    .tool-card .level-links {
       display: flex;
-      gap: 8px;
+      gap: 6px;
       flex-wrap: wrap;
     }
-    .level-links a {
+    .tool-card .level-links a {
       display: inline-block;
-      padding: 5px 14px;
-      border-radius: 6px;
-      font-size: 0.82rem;
+      padding: 4px 12px;
+      border-radius: 5px;
+      font-size: 0.78rem;
       font-weight: 600;
       text-decoration: none;
       color: #fff;
       transition: opacity 0.15s;
     }
-    .level-links a:hover { opacity: 0.85; }
-    .btn-overview { background: var(--accent); }
-    .btn-beginner { background: var(--badge-beginner); }
-    .btn-intermediate { background: var(--badge-intermediate); }
-    .btn-advanced { background: var(--badge-advanced); }
-    .about-section {
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: 28px;
-      margin-bottom: 40px;
-    }
-    .about-section h2 {
-      font-size: 1.1rem;
+    .tool-card .level-links a:hover { opacity: 0.82; }
+    .btn-overview { background: #0d6efd; }
+    .btn-beginner { background: #198754; }
+    .btn-intermediate { background: #fd7e14; }
+    .btn-advanced { background: #dc3545; }
+    .section-heading {
+      font-size: 1.15rem;
       font-weight: 700;
-      margin-bottom: 12px;
+      margin-bottom: 20px;
+      padding-bottom: 8px;
+      border-bottom: 2px solid var(--border);
     }
-    .about-section p {
-      font-size: 0.9rem;
-      color: var(--text-muted);
-      margin-bottom: 8px;
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.87em;
+      margin-bottom: 24px;
+      background: var(--bg-card);
     }
+    th, td {
+      border: 1px solid var(--border);
+      padding: 9px 13px;
+      text-align: left;
+      vertical-align: top;
+    }
+    th { font-weight: 700; }
     footer {
       text-align: center;
       padding: 24px;
       color: var(--text-muted);
       font-size: 0.82rem;
       border-top: 1px solid var(--border);
+      margin-top: 48px;
     }
     @media (max-width: 600px) {
-      header { padding: 16px; }
-      main { padding: 24px 16px; }
+      header { padding: 20px 16px; }
+      main { padding: 28px 16px; }
+      .tools-grid { grid-template-columns: 1fr; }
     }
   </style>
 </head>
 <body>
   <header>
     <h1>AIツール使いこなし指南</h1>
-    <p>フリーランスSE向け個人リファレンス — 業務システム開発・自動化への実践的活用</p>
+    <p class="subtitle">フリーランスSE向け実践リファレンス — 業務システム開発・自動化・エージェント活用</p>
   </header>
 
   <main>
-    <nav id="toc">
-      <h2>ツール一覧</h2>
-      <ul>
-        <li><a href="#chatgpt">ChatGPT</a></li>
-        <li><a href="#codex">Codex</a></li>
-        <li><a href="#copilot">GitHub Copilot</a></li>
-        <li><a href="#claude">Claude</a></li>
-        <li><a href="#manus">Manus</a></li>
-        <li><a href="#gemini">Gemini</a></li>
-        <li><a href="#openclaw">OpenClaw</a></li>
-      </ul>
-    </nav>
-
-    <section class="about-section">
+    <div class="intro">
       <h2>このサイトについて</h2>
-      <p>VBA / VB.NET / C# / SQL Server / Oracle を中心とした業務システム開発・病院物流システム開発に携わるフリーランスSEを主な読者として想定した個人リファレンスサイトです。</p>
-      <p>各AIツールの表面的な紹介ではなく、<strong>実際の業務システム開発・API連携・自動化</strong>に直結する技術的な深さを重視して記述しています。</p>
-      <p>各ツールページは「初級 / 中級 / 上級」の3レベルで構成されており、目的に応じて参照できます。毎週月曜日 08:00 JST に最新情報を確認し、変更があった場合のみ更新します。</p>
-    </section>
-
-    <h2 class="section-title" id="chatgpt">ChatGPT</h2>
-    <div class="tools-grid">
-      <div class="tool-card">
-        <h3>ChatGPT</h3>
-        <span class="tag tag-llm">LLM</span>
-        <span class="tag tag-agent">エージェント</span>
-        <p>OpenAI が提供する汎用対話型AI。GPT-4o・o3・GPT-5 系列のモデルを搭載し、コード生成・文書作成・推論・画像解析まで幅広く対応。API経由での業務組み込みも可能。</p>
-        <div class="level-links">
-          <a class="btn-overview" href="chatgpt/index.html">概要</a>
-          <a class="btn-beginner" href="chatgpt/beginner.html">初級</a>
-          <a class="btn-intermediate" href="chatgpt/intermediate.html">中級</a>
-          <a class="btn-advanced" href="chatgpt/advanced.html">上級</a>
-        </div>
+      <p>本サイトは、VBA / VB.NET / C# / SQL Server / Oracle を中心とした業務システム開発に携わるフリーランスエンジニアを対象に、主要なAIツールの実践的な活用方法を体系化したリファレンスです。表面的な操作説明ではなく、<strong>仕組みの理解・設計の根拠・業務への具体的な適用</strong>を重視しています。</p>
+      <p>各ツールのページは「概要」「初級」「中級」「上級」の4段階で構成されています。毎週月曜日 08:00 JST に最新情報を確認し、変更があった場合のみ更新します。</p>
+      <div class="level-legend">
+        <span><span class="badge badge-beginner">初級</span> 基本操作・典型的なユースケース</span>
+        <span><span class="badge badge-intermediate">中級</span> ツール固有機能の深掘り・他ツールとの使い分け</span>
+        <span><span class="badge badge-advanced">上級</span> API連携・自動化・エージェント構築・業務システム統合</span>
       </div>
     </div>
 
-    <h2 class="section-title" id="codex">Codex</h2>
     <div class="tools-grid">
+
       <div class="tool-card">
-        <h3>Codex (OpenAI Codex CLI)</h3>
-        <span class="tag tag-code">コーディング</span>
-        <span class="tag tag-agent">エージェント</span>
-        <p>OpenAI が提供するターミナル上で動作するコーディングエージェント。ローカルのコードベースを読み取り・変更・実行する。サンドボックス環境での自律的なコード操作が特徴。</p>
+        <div class="tool-icon">🤖</div>
+        <h2>ChatGPT</h2>
+        <p class="tool-desc">OpenAIが提供する汎用チャットAI。GPT-4oおよびo3モデルによる高度な推論、Advanced Data Analysis（Python実行）、カスタムGPTsによる業務特化アシスタントの構築まで幅広く対応。</p>
         <div class="level-links">
-          <a class="btn-overview" href="codex/index.html">概要</a>
-          <a class="btn-beginner" href="codex/beginner.html">初級</a>
-          <a class="btn-intermediate" href="codex/intermediate.html">中級</a>
-          <a class="btn-advanced" href="codex/advanced.html">上級</a>
+          <a href="chatgpt/index.html" class="btn-overview">概要</a>
+          <a href="chatgpt/beginner.html" class="btn-beginner">初級</a>
+          <a href="chatgpt/intermediate.html" class="btn-intermediate">中級</a>
+          <a href="chatgpt/advanced.html" class="btn-advanced">上級</a>
         </div>
       </div>
+
+      <div class="tool-card">
+        <div class="tool-icon">⚡</div>
+        <h2>Codex</h2>
+        <p class="tool-desc">OpenAIが提供するコード特化型AIエージェント。自然言語の指示からコードを生成・実行するだけでなく、既存リポジトリを解析してバグ修正・テスト追加・リファクタリングを自律的に行う。</p>
+        <div class="level-links">
+          <a href="codex/index.html" class="btn-overview">概要</a>
+          <a href="codex/beginner.html" class="btn-beginner">初級</a>
+          <a href="codex/intermediate.html" class="btn-intermediate">中級</a>
+          <a href="codex/advanced.html" class="btn-advanced">上級</a>
+        </div>
+      </div>
+
+      <div class="tool-card">
+        <div class="tool-icon">🐙</div>
+        <h2>GitHub Copilot</h2>
+        <p class="tool-desc">IDE（VS Code / Visual Studio）に統合されたAIペアプログラマー。コンテキストを読んだインライン補完、スラッシュコマンド、Copilot Workspaceによるタスク駆動開発を提供。</p>
+        <div class="level-links">
+          <a href="copilot/index.html" class="btn-overview">概要</a>
+          <a href="copilot/beginner.html" class="btn-beginner">初級</a>
+          <a href="copilot/intermediate.html" class="btn-intermediate">中級</a>
+          <a href="copilot/advanced.html" class="btn-advanced">上級</a>
+        </div>
+      </div>
+
+      <div class="tool-card">
+        <div class="tool-icon">🔮</div>
+        <h2>Claude</h2>
+        <p class="tool-desc">Anthropicが開発した、長文処理と論理的な文章生成に優れたAI。XMLタグによる構造化プロンプト、Artifacts機能、Projects機能による社内ナレッジ共有が特徴。</p>
+        <div class="level-links">
+          <a href="claude/index.html" class="btn-overview">概要</a>
+          <a href="claude/beginner.html" class="btn-beginner">初級</a>
+          <a href="claude/intermediate.html" class="btn-intermediate">中級</a>
+          <a href="claude/advanced.html" class="btn-advanced">上級</a>
+        </div>
+      </div>
+
+      <div class="tool-card">
+        <div class="tool-icon">🦾</div>
+        <h2>Manus</h2>
+        <p class="tool-desc">自律型汎用AIエージェント。サンドボックス環境でシェル・ブラウザ・コードを自律的に組み合わせ、オープンエンドな目標を達成する。GitHub連携・スケジュール実行・Webアプリ構築まで対応。</p>
+        <div class="level-links">
+          <a href="manus/index.html" class="btn-overview">概要</a>
+          <a href="manus/beginner.html" class="btn-beginner">初級</a>
+          <a href="manus/intermediate.html" class="btn-intermediate">中級</a>
+          <a href="manus/advanced.html" class="btn-advanced">上級</a>
+        </div>
+      </div>
+
+      <div class="tool-card">
+        <div class="tool-icon">💎</div>
+        <h2>Gemini</h2>
+        <p class="tool-desc">Googleが開発したマルチモーダルネイティブAI。最大200万トークンのコンテキストウィンドウ、Google Workspaceとのシームレスな統合、Vertex AIによるエンタープライズ対応が強み。</p>
+        <div class="level-links">
+          <a href="gemini/index.html" class="btn-overview">概要</a>
+          <a href="gemini/beginner.html" class="btn-beginner">初級</a>
+          <a href="gemini/intermediate.html" class="btn-intermediate">中級</a>
+          <a href="gemini/advanced.html" class="btn-advanced">上級</a>
+        </div>
+      </div>
+
+      <div class="tool-card">
+        <div class="tool-icon">🦀</div>
+        <h2>OpenClaw</h2>
+        <p class="tool-desc">オープンソースのローカルAIエージェントフレームワーク。WhatsApp・Telegram経由でAIを操作し、Webスクレイピング・DBアクセス・スケジュール実行を自動化。社内閉域網での運用が可能。</p>
+        <div class="level-links">
+          <a href="openclaw/index.html" class="btn-overview">概要</a>
+          <a href="openclaw/beginner.html" class="btn-beginner">初級</a>
+          <a href="openclaw/intermediate.html" class="btn-intermediate">中級</a>
+          <a href="openclaw/advanced.html" class="btn-advanced">上級</a>
+        </div>
+      </div>
+
     </div>
 
-    <h2 class="section-title" id="copilot">GitHub Copilot</h2>
-    <div class="tools-grid">
-      <div class="tool-card">
-        <h3>GitHub Copilot</h3>
-        <span class="tag tag-code">コーディング</span>
-        <span class="tag tag-agent">エージェント</span>
-        <p>GitHub / Microsoft が提供するAIペアプログラマー。VS Code・Visual Studio・JetBrains IDEに統合され、コード補完・チャット・エージェントモードでの自律的なタスク実行が可能。</p>
-        <div class="level-links">
-          <a class="btn-overview" href="copilot/index.html">概要</a>
-          <a class="btn-beginner" href="copilot/beginner.html">初級</a>
-          <a class="btn-intermediate" href="copilot/intermediate.html">中級</a>
-          <a class="btn-advanced" href="copilot/advanced.html">上級</a>
-        </div>
-      </div>
-    </div>
+    <h2 class="section-heading">ツール選択マトリクス — ユースケース別の最適解</h2>
+    <table>
+      <tr>
+        <th>ユースケース</th>
+        <th>最適ツール</th>
+        <th>理由</th>
+      </tr>
+      <tr>
+        <td>IDE上でのリアルタイムコード補完</td>
+        <td><strong>GitHub Copilot</strong></td>
+        <td>コンテキストスイッチなし。プロジェクト固有の変数名・命名規約を学習して提案する。</td>
+      </tr>
+      <tr>
+        <td>数百行のレガシーSQL / PL/SQLの解読</td>
+        <td><strong>Claude</strong></td>
+        <td>長文コンテキストの処理精度が高く、業務的な意図の推論と移植コードの生成を同時に行える。</td>
+      </tr>
+      <tr>
+        <td>複雑なアルゴリズム・数学的推論</td>
+        <td><strong>ChatGPT (o3)</strong></td>
+        <td>o3モデルの拡張思考（Extended Thinking）は数学・論理推論において現状最高水準。</td>
+      </tr>
+      <tr>
+        <td>既存リポジトリへのバグ修正・テスト追加</td>
+        <td><strong>Codex</strong></td>
+        <td>リポジトリ全体を解析した上で、複数ファイルにまたがる変更を自律的に実行できる。</td>
+      </tr>
+      <tr>
+        <td>複数ステップを跨ぐ「作業」の丸投げ</td>
+        <td><strong>Manus</strong></td>
+        <td>ブラウザ・シェル・コードを自律的に組み合わせ、最終成果物だけを受け取れる。</td>
+      </tr>
+      <tr>
+        <td>動画・画像・PDF等の多様なデータ解析</td>
+        <td><strong>Gemini</strong></td>
+        <td>マルチモーダルネイティブ設計。200万トークンのコンテキストで大量データを一括処理。</td>
+      </tr>
+      <tr>
+        <td>社内閉域網での定期自動化・DB連携</td>
+        <td><strong>OpenClaw</strong></td>
+        <td>ローカルデプロイが可能なため、社外にデータを出さずに常駐型エージェントを構築できる。</td>
+      </tr>
+    </table>
 
-    <h2 class="section-title" id="claude">Claude</h2>
-    <div class="tools-grid">
-      <div class="tool-card">
-        <h3>Claude</h3>
-        <span class="tag tag-llm">LLM</span>
-        <span class="tag tag-code">コーディング</span>
-        <p>Anthropic が提供する対話型AI。Claude 4（Opus 4・Sonnet 4）は長文コンテキスト・コーディング・推論に強みを持つ。Constitutional AI による安全設計が特徴。</p>
-        <div class="level-links">
-          <a class="btn-overview" href="claude/index.html">概要</a>
-          <a class="btn-beginner" href="claude/beginner.html">初級</a>
-          <a class="btn-intermediate" href="claude/intermediate.html">中級</a>
-          <a class="btn-advanced" href="claude/advanced.html">上級</a>
-        </div>
-      </div>
-    </div>
-
-    <h2 class="section-title" id="manus">Manus</h2>
-    <div class="tools-grid">
-      <div class="tool-card">
-        <h3>Manus</h3>
-        <span class="tag tag-agent">エージェント</span>
-        <p>Manus チームが提供する汎用AIエージェント。ブラウザ操作・コード実行・ファイル操作・Web検索を自律的に組み合わせ、複雑な多段階タスクを実行する。スキル拡張機構を持つ。</p>
-        <div class="level-links">
-          <a class="btn-overview" href="manus/index.html">概要</a>
-          <a class="btn-beginner" href="manus/beginner.html">初級</a>
-          <a class="btn-intermediate" href="manus/intermediate.html">中級</a>
-          <a class="btn-advanced" href="manus/advanced.html">上級</a>
-        </div>
-      </div>
-    </div>
-
-    <h2 class="section-title" id="gemini">Gemini</h2>
-    <div class="tools-grid">
-      <div class="tool-card">
-        <h3>Gemini</h3>
-        <span class="tag tag-llm">LLM</span>
-        <span class="tag tag-agent">エージェント</span>
-        <p>Google DeepMind が提供するマルチモーダルAI。Gemini 2.5 Pro/Flash は長大なコンテキストウィンドウ（100万トークン超）と強力な推論能力を持ち、Google Workspace との統合も可能。</p>
-        <div class="level-links">
-          <a class="btn-overview" href="gemini/index.html">概要</a>
-          <a class="btn-beginner" href="gemini/beginner.html">初級</a>
-          <a class="btn-intermediate" href="gemini/intermediate.html">中級</a>
-          <a class="btn-advanced" href="gemini/advanced.html">上級</a>
-        </div>
-      </div>
-    </div>
-
-    <h2 class="section-title" id="openclaw">OpenClaw</h2>
-    <div class="tools-grid">
-      <div class="tool-card">
-        <h3>OpenClaw</h3>
-        <span class="tag tag-agent">エージェント</span>
-        <span class="tag tag-local">ローカル</span>
-        <p>オープンソースのローカルAIエージェントフレームワーク。WhatsApp・Telegram等のメッセージングアプリ経由でAIを操作し、Webスクレイピング・ファイル操作・スケジュール実行を自動化する。MIT ライセンス・自己ホスト型。</p>
-        <div class="level-links">
-          <a class="btn-overview" href="openclaw/index.html">概要</a>
-          <a class="btn-beginner" href="openclaw/beginner.html">初級</a>
-          <a class="btn-intermediate" href="openclaw/intermediate.html">中級</a>
-          <a class="btn-advanced" href="openclaw/advanced.html">上級</a>
-        </div>
-      </div>
-    </div>
+    <h2 class="section-heading" style="margin-top:40px;">各ツールのコスト・プラン比較</h2>
+    <table>
+      <tr>
+        <th>ツール</th>
+        <th>無料プラン</th>
+        <th>有料プラン（主要）</th>
+        <th>API提供</th>
+      </tr>
+      <tr>
+        <td><strong>ChatGPT</strong></td>
+        <td>GPT-4o（制限あり）</td>
+        <td>Plus: $20/月、Pro: $200/月</td>
+        <td>あり（OpenAI API）</td>
+      </tr>
+      <tr>
+        <td><strong>Codex</strong></td>
+        <td>なし（ChatGPT Plus以上に含む）</td>
+        <td>ChatGPT Plus以上で利用可</td>
+        <td>あり（Responses API）</td>
+      </tr>
+      <tr>
+        <td><strong>GitHub Copilot</strong></td>
+        <td>個人向け無料枠（月2000補完）</td>
+        <td>Individual: $10/月、Business: $19/月</td>
+        <td>なし（IDE統合のみ）</td>
+      </tr>
+      <tr>
+        <td><strong>Claude</strong></td>
+        <td>Claude.ai（制限あり）</td>
+        <td>Pro: $20/月、Team: $25/月</td>
+        <td>あり（Anthropic API）</td>
+      </tr>
+      <tr>
+        <td><strong>Manus</strong></td>
+        <td>あり（クレジット制）</td>
+        <td>Starter: $39/月〜</td>
+        <td>あり（Manus API）</td>
+      </tr>
+      <tr>
+        <td><strong>Gemini</strong></td>
+        <td>Gemini（制限あり）</td>
+        <td>Advanced: $19.99/月（Google One AI）</td>
+        <td>あり（Google AI / Vertex AI）</td>
+      </tr>
+      <tr>
+        <td><strong>OpenClaw</strong></td>
+        <td>オープンソース（無料）</td>
+        <td>自己ホスト（サーバー費用のみ）</td>
+        <td>LLM APIは別途必要</td>
+      </tr>
+    </table>
 
   </main>
 
   <footer>
-    <p>AIツール使いこなし指南 — フリーランスSE向け個人リファレンス</p>
-    <p style="margin-top:4px;">最終更新：2026年06月08日</p>
+    <p>AIツール使いこなし指南 — フリーランスSE向け実践リファレンス</p>
+    <p style="margin-top:8px;">最終更新：2026年06月08日</p>
   </footer>
 </body>
 </html>

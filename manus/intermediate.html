@@ -217,19 +217,38 @@
     <nav id="toc">
       <h2>目次</h2>
       <ul>
-        <li><a href="#sec1">ファイル操作とデータ処理</a></li>
-<li><a href="#sec2">スクリプトの作成と実行</a></li>
+        <li><a href="#sec1">ブラウザ操作とスクレイピング</a></li>
+<li><a href="#sec2">サンドボックス環境のハック</a></li>
+<li><a href="#sec3">並列処理（Map）の活用</a></li>
+<li><a href="#sec4">エラー時の介入とリカバリ</a></li>
 
       </ul>
     </nav>
 
     
-<h2 class="section-heading" id="sec1">ファイル操作とデータ処理</h2>
-<p>CSVやExcelファイルを読み込ませ、データのクレンジング、集計、グラフ化などの一連の処理を行わせる。</p>
+<h2 class="section-heading" id="sec1">ブラウザ操作とスクレイピング</h2>
+<p>単純なHTTPリクエストでは取得できない、JavaScriptで動的にレンダリングされるページや、ログインが必要なページからの情報抽出を行います。</p>
+<p><strong>プロンプト例：</strong></p>
+<pre><code>以下のURL（社内のSaaSツール）にアクセスしてください。
+ログイン画面が表示されたら、私にブラウザの操作権限（Takeover）を要求してください。
+私がログインを完了した後、ダッシュボードから「今月の売上データ」のテーブルを読み取り、CSVファイルとして出力してください。
+</code></pre>
 <a href="#toc" class="back-to-toc">▲ 目次へ戻る</a>
 
-<h2 class="section-heading" id="sec2">スクリプトの作成と実行</h2>
-<p>Pythonやシェルスクリプトを記述させ、それをサンドボックス環境内で実行して結果を得る。エラーが発生した場合は自律的に修正を試みる。</p>
+<h2 class="section-heading" id="sec2">サンドボックス環境のハック</h2>
+<p>ManusはUbuntu環境で動作しているため、標準でインストールされていないパッケージ（例えば特定のデータベースクライアントや、画像処理用のCライブラリなど）が必要な場合、<code>apt-get</code> や <code>pip install</code> を使って自ら環境を構築させることができます。</p>
+<pre><code>処理の前に、`sudo apt-get update` と `sudo apt-get install -y sqlite3` を実行し、SQLite環境を構築してから以下のタスクを進めてください。
+</code></pre>
+<a href="#toc" class="back-to-toc">▲ 目次へ戻る</a>
+
+<h2 class="section-heading" id="sec3">並列処理（Map）の活用</h2>
+<p>大量のデータを処理する場合、Manusの並列処理ツール（Map）を活用させます。これはPythonの `Pool.map()` のように、数百のサブタスクを並列で実行する機能です。</p>
+<p>「この100社の企業名リストについて、それぞれの企業のCIOの名前とメールアドレスを検索し、結果をCSVにまとめて」といった、広範なリサーチ作業を劇的に高速化できます。</p>
+<a href="#toc" class="back-to-toc">▲ 目次へ戻る</a>
+
+<h2 class="section-heading" id="sec4">エラー時の介入とリカバリ</h2>
+<p>Manusがタスクの途中でスタックした場合（例：予期せぬポップアップでブラウザ操作が失敗した、APIのRate Limitに引っかかった等）、チャットを通じて直接助け舟を出します。</p>
+<p>「現在の画面スクリーンショットを見せて」と指示して状況を確認し、「ポップアップの右上の[X]ボタン（index: 15）をクリックしてから再試行して」と具体的に介入することで、タスクを完了に導きます。</p>
 <a href="#toc" class="back-to-toc">▲ 目次へ戻る</a>
 
   </main>

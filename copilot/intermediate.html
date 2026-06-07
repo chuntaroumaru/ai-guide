@@ -217,19 +217,49 @@
     <nav id="toc">
       <h2>目次</h2>
       <ul>
-        <li><a href="#sec1">Copilot Chatの活用</a></li>
-<li><a href="#sec2">テストコードの自動生成</a></li>
+        <li><a href="#sec1">コンテキストの制御（タブ管理術）</a></li>
+<li><a href="#sec2">スラッシュコマンドと変数</a></li>
+<li><a href="#sec3">単体テストの効率的な生成</a></li>
+<li><a href="#sec4">ドキュメントの自動生成</a></li>
 
       </ul>
     </nav>
 
     
-<h2 class="section-heading" id="sec1">Copilot Chatの活用</h2>
-<p>IDE内のチャットウィンドウで、選択したコードブロックの解説を求めたり、リファクタリングの提案を受けたりする。`/explain`や`/fix`などのスラッシュコマンドを活用する。</p>
+<h2 class="section-heading" id="sec1">コンテキストの制御（タブ管理術）</h2>
+<p>Copilotが適切な提案をするためには、必要な情報（コンテキスト）を与え、不要な情報を排除することが極めて重要です。Copilotは<strong>現在開いているタブ</strong>を優先的に読み込みます。</p>
+<p><strong>ベストプラクティス：</strong></p>
+<ul>
+  <li>新しいクラスを実装する際、依存するインターフェースや、似たような処理を行っている別のクラスを<strong>隣のタブで開いておく</strong>。</li>
+  <li>関係のないファイル（過去のプロジェクトの残骸など）は閉じておく。</li>
+  <li>Copilot Chatでは、<code>#file:FileName.cs</code> のように明示的にファイルを参照させる。</li>
+</ul>
 <a href="#toc" class="back-to-toc">▲ 目次へ戻る</a>
 
-<h2 class="section-heading" id="sec2">テストコードの自動生成</h2>
-<p>実装したメソッドに対して、正常系および異常系の単体テスト（ユニットテスト）のコードを自動生成させる。</p>
+<h2 class="section-heading" id="sec2">スラッシュコマンドと変数</h2>
+<p>Copilot Chatでは、特定のタスクを素早く実行するためのスラッシュコマンドが用意されています。</p>
+<ul>
+  <li><code>/explain</code>：選択したコードの解説（レガシーコードの解読に最適）</li>
+  <li><code>/fix</code>：選択したコードの問題点を修正</li>
+  <li><code>/tests</code>：選択したコードの単体テストを生成</li>
+  <li><code>/doc</code>：選択したコードのXMLドキュメントコメントを生成</li>
+</ul>
+<p>また、<code>@workspace</code> を指定すると、開いているプロジェクト全体から関連する情報を検索して回答してくれます（例：「<code>@workspace</code> データベース接続文字列はどこで定義されていますか？」）。</p>
+<a href="#toc" class="back-to-toc">▲ 目次へ戻る</a>
+
+<h2 class="section-heading" id="sec3">単体テストの効率的な生成</h2>
+<p>テスト対象のメソッドを選択し、<code>/tests</code> コマンドを実行します。この時、チャットのプロンプトに社内規約を追加することで、手戻りを減らせます。</p>
+<p><strong>プロンプト例：</strong></p>
+<pre><code>/tests
+以下の条件に従ってxUnitのテストを生成してください。
+- AAA (Arrange, Act, Assert) パターンに従うこと。
+- 依存関係のモック化には Moq を使用すること。
+- 正常系だけでなく、引数が null の場合や、DBからデータが取得できなかった場合の異常系も含めること。
+</code></pre>
+<a href="#toc" class="back-to-toc">▲ 目次へ戻る</a>
+
+<h2 class="section-heading" id="sec4">ドキュメントの自動生成</h2>
+<p>メソッドのシグネチャ（引数と戻り値）を定義した直後に <code>///</code> (C#の場合) と入力すると、Copilotがメソッドの目的、各引数の説明、戻り値の説明を含むXMLドキュメントコメントを自動生成します。複雑なロジックを実装した後は、<code>/doc</code> コマンドでコードの意図をドキュメント化させると、保守性が向上します。</p>
 <a href="#toc" class="back-to-toc">▲ 目次へ戻る</a>
 
   </main>

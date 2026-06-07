@@ -217,28 +217,63 @@
     <nav id="toc">
       <h2>目次</h2>
       <ul>
-        <li><a href="#sec1">基本的な使い方</a></li>
-<li><a href="#sec2">プロンプトの書き方</a></li>
-<li><a href="#sec3">典型的なユースケース</a></li>
+        <li><a href="#sec1">エンジニア向けプロンプトの基本構造</a></li>
+<li><a href="#sec2">レガシーコードの翻訳と解説</a></li>
+<li><a href="#sec3">エラー解析とトラブルシューティング</a></li>
+<li><a href="#sec4">正規表現と定型処理の生成</a></li>
 
       </ul>
     </nav>
 
     
-<h2 class="section-heading" id="sec1">基本的な使い方</h2>
-<p>Webインターフェースを通じて自然言語で質問や指示を入力する。モデルの選択（GPT-4oなど）によって応答の速度や推論能力が異なるため、用途に応じて適切なモデルを選択する。</p>
+<h2 class="section-heading" id="sec1">エンジニア向けプロンプトの基本構造</h2>
+<p>ChatGPTから正確で実用的な回答を引き出すには、前提条件を明確に定義することが不可欠です。特に、35年の経験を持つエンジニアであれば、初心者向けの冗長な解説は不要です。以下のようなフォーマットをテンプレート化しておくことを推奨します。</p>
+<pre><code># 命令
+あなたはシニアソフトウェアエンジニアです。以下の[要件]を満たすC#のコードを記述してください。
+
+# 前提条件
+- 対象フレームワーク: .NET 8
+- データベース: SQL Server 2022
+- ORM: Entity Framework Core
+- 命名規約: 
+  - ローカル変数: camelCase
+  - プライベート変数: _camelCase
+  - クラス、構造体、関数、メソッド: PascalCase
+  - 定数: UPPER_SNAKE_CASE
+  - DBフィールド: snake_case
+
+# 制約事項
+- 初心者向けの解説や前置きは一切不要です。コードのみを出力してください。
+- エラーハンドリング（try-catch）を必ず含めること。
+- SQLインジェクション対策としてパラメータ化クエリを使用すること。
+
+# 要件
+...
+</code></pre>
 <a href="#toc" class="back-to-toc">▲ 目次へ戻る</a>
 
-<h2 class="section-heading" id="sec2">プロンプトの書き方</h2>
-<p>明確な役割を与え、前提条件や制約事項を具体的に記述することが重要。例えば、「あなたは35年の経験を持つシステムエンジニアです。以下のVBAコードをC#に変換してください。命名規約はローカル変数:camelCase、メソッド:PascalCaseに従うこと。」のように指示する。</p>
+<h2 class="section-heading" id="sec2">レガシーコードの翻訳と解説</h2>
+<p>VB6.0やVBA、古いPL/SQLのコードを最新のC#やT-SQLに移行する際、ChatGPTは強力な翻訳機となります。ただし、単に「変換して」と指示するのではなく、<strong>「なぜそのような実装になっているか」の意図を汲み取らせる</strong>ことが重要です。</p>
+<div class="callout warning">
+  <strong>⚠️ Warning:</strong> レガシーコードには、当時のハードウェア制約や古いライブラリのバグを回避するための「ハック（Workaround）」が含まれていることが多々あります。ChatGPTに翻訳させる際は、「このVBAコードをC#に変換してください。その際、現代のC#のベストプラクティス（LINQの活用など）を用いてリファクタリングし、不要なハックがあれば除外して理由を説明してください」と指示します。
+</div>
 <a href="#toc" class="back-to-toc">▲ 目次へ戻る</a>
 
-<h2 class="section-heading" id="sec3">典型的なユースケース</h2>
-<ul>
-  <li><strong>コード解説</strong>：難解なPL/SQLプロシージャやVB.NETのコードを貼り付け、処理内容の解説を求める。</li>
-  <li><strong>エラー解析</strong>：エラーメッセージと関連するコードを提示し、原因と解決策を提案させる。</li>
-  <li><strong>正規表現の生成</strong>：要件（例：「郵便番号の形式に一致する正規表現」）を伝え、正規表現を生成させる。</li>
-</ul>
+<h2 class="section-heading" id="sec3">エラー解析とトラブルシューティング</h2>
+<p>例外のスタックトレースや、SQL Serverの実行計画エラーを解析させる際は、エラーメッセージだけでなく、関連するコードブロックやテーブルのスキーマ定義（CREATE TABLE文）を一緒に渡すことで、回答の精度が劇的に向上します。</p>
+<p><strong>悪い例：</strong>「C#でNullReferenceExceptionが出ます。なぜですか？」</p>
+<p><strong>良い例：</strong>「以下のC#メソッド実行時にNullReferenceExceptionが発生します。スタックトレースと関連するクラス定義は以下の通りです。原因箇所を特定し、null安全なコード（C# 8.0以降のnull許容参照型を考慮）に修正してください。」</p>
+<a href="#toc" class="back-to-toc">▲ 目次へ戻る</a>
+
+<h2 class="section-heading" id="sec4">正規表現と定型処理の生成</h2>
+<p>複雑な正規表現の構築や、CSVファイルのパース、特定のフォーマットの日付変換など、頭を使うが定型的な処理はChatGPTに任せるべき代表例です。</p>
+<p>プロンプト例：</p>
+<pre><code>C#で使用する正規表現を生成してください。
+要件：
+1. 日本の固定電話番号（例: 03-1234-5678, 045-123-4567）にマッチすること。
+2. ハイフンは必須。
+3. マッチした結果から、市外局番、市内局番、加入者番号を名前付きキャプチャグループ（AreaCode, CityCode, SubscriberNumber）で抽出できること。
+</code></pre>
 <a href="#toc" class="back-to-toc">▲ 目次へ戻る</a>
 
   </main>

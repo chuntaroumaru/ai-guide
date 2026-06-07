@@ -217,27 +217,34 @@
     <nav id="toc">
       <h2>目次</h2>
       <ul>
-        <li><a href="#sec1">Geminiの概要</a></li>
-<li><a href="#sec2">対象読者と活用方針</a></li>
-<li><a href="#sec3">各レベルの案内</a></li>
+        <li><a href="#sec1">Geminiの基本アーキテクチャと特徴</a></li>
+<li><a href="#sec2">Googleエコシステムとの統合</a></li>
+<li><a href="#sec3">業務システム開発における位置づけ</a></li>
+<li><a href="#sec4">各レベルの学習ロードマップ</a></li>
 
       </ul>
     </nav>
 
     
-<h2 class="section-heading" id="sec1">Geminiの概要</h2>
-<p>Google DeepMindが提供するマルチモーダルAI。テキスト、画像、音声、動画をシームレスに理解し処理できる。特に長大なコンテキストウィンドウ（100万トークン超）を持つモデルが強力。</p>
+<h2 class="section-heading" id="sec1">Geminiの基本アーキテクチャと特徴</h2>
+<p>Gemini（ジェミニ）はGoogleが開発したマルチモーダルネイティブなAIモデルです。最初からテキスト、画像、音声、動画、コードを同時に理解できるように設計されている点が最大の特徴です。</p>
+<p>特に <strong>Gemini 1.5 Pro</strong> は、最大200万トークンという桁違いのコンテキストウィンドウを持ち、1時間の動画、数万行のコードベース、あるいは数十冊のPDFマニュアルを一度に飲み込んで解析することが可能です。</p>
 <a href="#toc" class="back-to-toc">▲ 目次へ戻る</a>
 
-<h2 class="section-heading" id="sec2">対象読者と活用方針</h2>
-<p>Google Workspace（ドキュメント、スプレッドシート、ドライブ等）を頻繁に利用するユーザーや、画像や動画を含む資料（例：画面キャプチャ付きの操作マニュアル）を解析・作成したいエンジニアに最適。</p>
+<h2 class="section-heading" id="sec2">Googleエコシステムとの統合</h2>
+<p>Geminiのもう一つの強みは、Google Workspace（Docs, Sheets, Drive, Gmail）やGoogle Cloud（GCP）とのシームレスな統合です。ブラウザ版のGemini Advancedでは、ユーザーのGoogle Drive内にあるファイルを直接参照して回答を生成できます。</p>
 <a href="#toc" class="back-to-toc">▲ 目次へ戻る</a>
 
-<h2 class="section-heading" id="sec3">各レベルの案内</h2>
+<h2 class="section-heading" id="sec3">業務システム開発における位置づけ</h2>
+<p>フリーランスエンジニアにとって、Geminiは「超大規模データのバッチ処理・解析」および「GCP環境での開発支援」に最も適しています。</p>
+<p>例えば、「過去10年分の業務要件変更履歴（Wordファイル群）をすべて読み込ませ、特定の機能がなぜ現在の仕様になったのかの経緯を時系列で抽出する」といった、人間の記憶力と検索能力の限界を超えるタスクで真価を発揮します。</p>
+<a href="#toc" class="back-to-toc">▲ 目次へ戻る</a>
+
+<h2 class="section-heading" id="sec4">各レベルの学習ロードマップ</h2>
 <ul>
-  <li><strong>初級編</strong>：基本的な使い方、マルチモーダル機能の活用</li>
-  <li><strong>中級編</strong>：Google Workspace連携、超長文コンテキストの処理</li>
-  <li><strong>上級編</strong>：Gemini APIの活用、カスタムAIアプリケーションの開発</li>
+  <li><strong>初級編</strong>：Google Drive連携、画像・PDFのマルチモーダル解析。</li>
+  <li><strong>中級編</strong>：超長文コンテキストの活用、GCP連携（Gemini Code Assist）、動画からの情報抽出。</li>
+  <li><strong>上級編</strong>：Gemini API (Vertex AI) の組み込み、Function Calling、System Instructionsの最適化。</li>
 </ul>
 <a href="#toc" class="back-to-toc">▲ 目次へ戻る</a>
 

@@ -217,19 +217,42 @@
     <nav id="toc">
       <h2>目次</h2>
       <ul>
-        <li><a href="#sec1">基本的な使い方</a></li>
-<li><a href="#sec2">マルチモーダル機能の活用</a></li>
+        <li><a href="#sec1">Google Workspace拡張機能の活用</a></li>
+<li><a href="#sec2">画像とPDFのマルチモーダル解析</a></li>
+<li><a href="#sec3">データ集計と表の作成</a></li>
+<li><a href="#sec4">よくある落とし穴</a></li>
 
       </ul>
     </nav>
 
     
-<h2 class="section-heading" id="sec1">基本的な使い方</h2>
-<p>テキストでの対話に加え、画像やドキュメントをアップロードして質問する。レスポンスが高速である点が特徴。</p>
+<h2 class="section-heading" id="sec1">Google Workspace拡張機能の活用</h2>
+<p>ブラウザ版Gemini（またはGemini Advanced）では、設定から拡張機能をオンにすることで、Google Drive、Gmail、Google Docsのデータを直接検索・参照できます。</p>
+<p><strong>プロンプト例：</strong></p>
+<pre><code>@Google Drive
+「2025年度_病院物流システム移行計画」という名前のドキュメントを探して、その中の「フェーズ2のスケジュール」を要約してください。
+</code></pre>
 <a href="#toc" class="back-to-toc">▲ 目次へ戻る</a>
 
-<h2 class="section-heading" id="sec2">マルチモーダル機能の活用</h2>
-<p>エラー画面のスクリーンショットや、手書きのシステム構成図の画像をアップロードし、その内容の解説やテキスト化、コード化を依頼する。</p>
+<h2 class="section-heading" id="sec2">画像とPDFのマルチモーダル解析</h2>
+<p>Geminiは視覚情報の処理に優れています。手書きのアーキテクチャ図（ホワイトボードの写真）や、レガシーシステムの画面キャプチャをアップロードし、そこからテキストや構造を抽出させます。</p>
+<p><strong>プロンプト例：</strong></p>
+<pre><code>（VB6.0の画面キャプチャ画像を添付）
+この画面のUI要素（テキストボックス、ボタン、グリッド）をリストアップし、それぞれの要素がどのような業務アクションに対応しているか推測してください。その後、このUIをC#のWPFで再現するためのXAMLコードの骨組みを生成してください。
+</code></pre>
+<a href="#toc" class="back-to-toc">▲ 目次へ戻る</a>
+
+<h2 class="section-heading" id="sec3">データ集計と表の作成</h2>
+<p>非構造化データ（テキストの羅列やメールのやり取り）を構造化データ（表）に変換し、それをGoogle Sheetsに直接エクスポートする機能が強力です。</p>
+<pre><code>以下の会議の議事録テキストから、「決定事項」「担当者」「期限」を抽出し、Markdownの表形式で出力してください。
+出力後、Googleスプレッドシートにエクスポートするボタンを表示してください。
+</code></pre>
+<a href="#toc" class="back-to-toc">▲ 目次へ戻る</a>
+
+<h2 class="section-heading" id="sec4">よくある落とし穴</h2>
+<div class="callout warning">
+  <strong>⚠️ Warning:</strong> GeminiはGoogle検索（グラウンディング）を自動的に行い、最新情報を取り入れますが、検索結果に引きずられて独自の推論が弱くなる（一般的なWeb記事の要約になってしまう）ことがあります。純粋なコードの推論や論理的思考を求める場合は、「Web検索は行わず、あなたの知識と論理的推論のみで回答してください」と明示的に指示する方が良い結果を得られる場合があります。
+</div>
 <a href="#toc" class="back-to-toc">▲ 目次へ戻る</a>
 
   </main>

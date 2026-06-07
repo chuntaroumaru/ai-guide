@@ -217,19 +217,43 @@
     <nav id="toc">
       <h2>目次</h2>
       <ul>
-        <li><a href="#sec1">ローカルLLMの利用</a></li>
-<li><a href="#sec2">スケジュール実行とWebスクレイピング</a></li>
+        <li><a href="#sec1">カスタムツールの開発</a></li>
+<li><a href="#sec2">社内データベースとの接続</a></li>
+<li><a href="#sec3">定期実行タスクの設定</a></li>
+<li><a href="#sec4">状態（State）の保持</a></li>
 
       </ul>
     </nav>
 
     
-<h2 class="section-heading" id="sec1">ローカルLLMの利用</h2>
-<p>Ollamaなどを利用してローカル環境で動作するLLMをOpenClawのバックエンドとして設定し、完全にオフライン（外部APIに依存しない）で動作するエージェントを構築する。</p>
+<h2 class="section-heading" id="sec1">カスタムツールの開発</h2>
+<p>OpenClawの真価は、自社の業務に合わせた「カスタムツール」をPythonで記述して追加できる点にあります。</p>
+<pre><code># カスタムツールの例：在庫確認ツール
+from openclaw.tools import BaseTool
+
+class CheckInventoryTool(BaseTool):
+    name = "check_inventory"
+    description = "指定されたアイテムの現在の在庫数を社内システムから取得します。"
+    
+    def _run(self, item_name: str) -> str:
+        # ここにDBアクセスや社内API呼び出しのロジックを書く
+        return f"{item_name}の在庫は現在150個です。"
+</code></pre>
+<p>これを登録することで、チャットから「シリンジの在庫いくつ？」と聞くだけで、エージェントがこのツールを呼び出して回答します。</p>
 <a href="#toc" class="back-to-toc">▲ 目次へ戻る</a>
 
-<h2 class="section-heading" id="sec2">スケジュール実行とWebスクレイピング</h2>
-<p>cronライクな設定を利用して定期的にタスク（例：毎朝特定のWebサイトをスクレイピングしてニュースを要約し、Telegramに送信する）を実行させる。</p>
+<h2 class="section-heading" id="sec2">社内データベースとの接続</h2>
+<p>SQL ServerやOracleへの接続ツールを実装します。セキュリティの観点から、エージェントに直接SQLを書かせる（Text-to-SQL）のではなく、あらかじめ定義したストアドプロシージャやViewを呼び出すツールを用意するアプローチが安全です。</p>
+<a href="#toc" class="back-to-toc">▲ 目次へ戻る</a>
+
+<h2 class="section-heading" id="sec3">定期実行タスクの設定</h2>
+<p>OpenClawにはスケジューラが組み込まれており、自然言語で定期タスクを設定できます。</p>
+<p>「毎朝8時に、<code>check_inventory</code> ツールを使って在庫が10個以下のアイテムをリストアップし、このチャットに通知して」</p>
+<p>エージェントはこの指示をパースし、内部のcronジョブとして登録します。</p>
+<a href="#toc" class="back-to-toc">▲ 目次へ戻る</a>
+
+<h2 class="section-heading" id="sec4">状態（State）の保持</h2>
+<p>長期的なタスクをこなすために、エージェントは過去の対話や取得したデータをローカルのSQLiteなどに記憶（Memory）として保持します。「昨日頼んだあの件の続きをやって」といったコンテキストを跨いだ指示が可能になります。</p>
 <a href="#toc" class="back-to-toc">▲ 目次へ戻る</a>
 
   </main>

@@ -217,19 +217,42 @@
     <nav id="toc">
       <h2>目次</h2>
       <ul>
-        <li><a href="#sec1">API連携</a></li>
-<li><a href="#sec2">システム移行の全体計画立案</a></li>
+        <li><a href="#sec1">Anthropic APIの業務統合</a></li>
+<li><a href="#sec2">Prompt Cachingによるコスト最適化</a></li>
+<li><a href="#sec3">Tool Use (Function Calling) の実装</a></li>
+<li><a href="#sec4">Computer Useの概念と応用</a></li>
 
       </ul>
     </nav>
 
     
-<h2 class="section-heading" id="sec1">API連携</h2>
-<p>Anthropic APIを使用して、社内ドキュメント検索システムや、高度な推論を必要とするデータ処理パイプラインを構築する。</p>
+<h2 class="section-heading" id="sec1">Anthropic APIの業務統合</h2>
+<p>C#からAnthropic API（Claude）を呼び出して、社内システムに高度な自然言語処理機能を組み込みます。公式のSDK、またはHTTPクライアントを使用してJSONベースのREST APIを叩きます。</p>
+<pre><code>// HttpClientを使用したAnthropic API呼び出しの基本構造 (C#)
+var requestBody = new {
+    model = "claude-3-5-sonnet-20241022",
+    max_tokens = 1024,
+    messages = new[] {
+        new { role = "user", content = "病院物流におけるABC分析の手法を解説してください。" }
+    }
+};
+// x-api-key ヘッダーと anthropic-version ヘッダーが必須です。
+</code></pre>
 <a href="#toc" class="back-to-toc">▲ 目次へ戻る</a>
 
-<h2 class="section-heading" id="sec2">システム移行の全体計画立案</h2>
-<p>オンプレミスからクラウドへの移行や、VB6.0からC#へのマイグレーションなど、大規模プロジェクトにおけるフェーズ分け、リスク評価、必要なリソースの算出を行わせる。</p>
+<h2 class="section-heading" id="sec2">Prompt Cachingによるコスト最適化</h2>
+<p>Claude APIの強力な機能に「Prompt Caching」があります。これは、巨大なシステムプロンプトや長文のドキュメント（例えば社内規約のPDFテキスト）をAPI側でキャッシュし、2回目以降の呼び出しで入力トークン費用とレイテンシ（応答時間）を劇的に削減する技術です。</p>
+<p>業務システムで毎回同じDBスキーマ情報をLLMに渡してSQLを生成させるようなRAGシステムにおいて、キャッシュの有無はランニングコストに直結します。</p>
+<a href="#toc" class="back-to-toc">▲ 目次へ戻る</a>
+
+<h2 class="section-heading" id="sec3">Tool Use (Function Calling) の実装</h2>
+<p>ChatGPTと同様に、ClaudeにもTool Use（関数呼び出し）機能があります。ClaudeのTool UseはJSON Schemaの定義に厳密に従い、複雑な引数を持つ関数の推論に優れています。</p>
+<p>自社システムのAPI（例：在庫引き当てAPI、発注API）をToolとしてClaudeに渡し、「A病棟のシリンジが足りないから補充しておいて」という自然言語の指示から、自動的に在庫確認→発注処理のAPIをシーケンシャルに叩く自律エージェントを構築できます。</p>
+<a href="#toc" class="back-to-toc">▲ 目次へ戻る</a>
+
+<h2 class="section-heading" id="sec4">Computer Useの概念と応用</h2>
+<p>2024年後半に発表されたClaude 3.5 Sonnetの「Computer Use」機能は、API経由でAIに<strong>「マウスの操作」や「キーボード入力」</strong>を行わせる画期的な機能です。</p>
+<p>APIがないレガシーな業務システム（VB6.0で作られたGUIアプリなど）の画面スクリーンショットをClaudeに渡し、Claudeが「どこをクリックし、何を入力すべきか」の座標を返すことで、RPA（Robotic Process Automation）をAIベースで動的に実行することが可能になります。</p>
 <a href="#toc" class="back-to-toc">▲ 目次へ戻る</a>
 
   </main>

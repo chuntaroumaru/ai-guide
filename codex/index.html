@@ -217,27 +217,38 @@
     <nav id="toc">
       <h2>目次</h2>
       <ul>
-        <li><a href="#sec1">Codexの概要</a></li>
-<li><a href="#sec2">対象読者と活用方針</a></li>
-<li><a href="#sec3">各レベルの案内</a></li>
+        <li><a href="#sec1">Codexとは何か</a></li>
+<li><a href="#sec2">GitHub Copilotとの違い</a></li>
+<li><a href="#sec3">業務システム開発における位置づけ</a></li>
+<li><a href="#sec4">各レベルの学習ロードマップ</a></li>
 
       </ul>
     </nav>
 
     
-<h2 class="section-heading" id="sec1">Codexの概要</h2>
-<p>OpenAIが提供するターミナル上で動作するコーディングエージェント。ローカルのコードベースを直接読み取り、変更し、実行する能力を持つ。自律的なコード操作が可能で、コマンドラインインターフェース（CLI）を通じて対話する。</p>
+<h2 class="section-heading" id="sec1">Codexとは何か</h2>
+<p>OpenAI Codexは、GPT-3/GPT-4アーキテクチャをベースに、数十億行の公開ソースコードを学習させたプログラミング特化型の言語モデルです。自然言語の指示をコードに変換したり、コードの続きを推論して自動補完したりする能力に長けています。</p>
+<p>※2026年現在、純粋な「Codex」という単独の製品よりも、GPT-4oやo3などの最新モデルがCodexの能力を内包しているケースが多く、またその技術はGitHub Copilotの基盤として広く普及しています。</p>
 <a href="#toc" class="back-to-toc">▲ 目次へ戻る</a>
 
-<h2 class="section-heading" id="sec2">対象読者と活用方針</h2>
-<p>ターミナル操作に抵抗がなく、ローカル環境でのスクリプト実行やファイルの一括処理を自動化したいエンジニア向け。VBAやVB.NETのプロジェクトにおいて、定型的なリファクタリングやファイル名の変更などを一括で行う際に有用。</p>
-<a href="#toc" class="back-to-toc">▲ 目次へ戻る</a>
-
-<h2 class="section-heading" id="sec3">各レベルの案内</h2>
+<h2 class="section-heading" id="sec2">GitHub Copilotとの違い</h2>
+<p>Codexは「モデルそのもの（API経由でアクセスするエンジン）」であり、GitHub Copilotは「Codexモデルを利用したIDE向けのアシスタント製品」です。</p>
 <ul>
-  <li><strong>初級編</strong>：インストールと基本的な使い方、ターミナルでの操作方法</li>
-  <li><strong>中級編</strong>：ローカルコードベースの操作、一括リファクタリング</li>
-  <li><strong>上級編</strong>：自律的なタスク実行、CI/CDパイプラインへの組み込み</li>
+  <li><strong>Codex (API)</strong>：自社システムに組み込んで、独自のコード生成ツールや自動レビューツールを作るための基盤。</li>
+  <li><strong>GitHub Copilot</strong>：VS CodeやVisual Studioなどのエディタに統合され、タイピング中にリアルタイムで補完を行うエンドユーザー向けツール。</li>
+</ul>
+<a href="#toc" class="back-to-toc">▲ 目次へ戻る</a>
+
+<h2 class="section-heading" id="sec3">業務システム開発における位置づけ</h2>
+<p>フリーランスエンジニアにとって、Codex（およびそれを内包する最新API）は、「自作のコードジェネレータ」や「静的解析ツールの拡張」として利用価値があります。</p>
+<p>例えば、DBのスキーマ定義（DDL）から、C#のEntity Framework Core用エンティティクラス群、リポジトリ層、さらには基本的なCRUD操作のAPIコントローラーまでを<strong>一括で自動生成するスクリプト</strong>を自作する際、裏側のエンジンとしてCodex系APIが活躍します。</p>
+<a href="#toc" class="back-to-toc">▲ 目次へ戻る</a>
+
+<h2 class="section-heading" id="sec4">各レベルの学習ロードマップ</h2>
+<ul>
+  <li><strong>初級編</strong>：Codexの得意・不得意の理解、基本的なコード生成プロンプトの書き方。</li>
+  <li><strong>中級編</strong>：コンテキスト（周辺コード）の与え方、複数言語間の翻訳（VBAからC#への変換など）。</li>
+  <li><strong>上級編</strong>：APIを利用したカスタムコードジェネレータの開発、社内コーディング規約を強制するファインチューニングやRAGの応用。</li>
 </ul>
 <a href="#toc" class="back-to-toc">▲ 目次へ戻る</a>
 

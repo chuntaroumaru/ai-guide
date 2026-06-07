@@ -217,27 +217,39 @@
     <nav id="toc">
       <h2>目次</h2>
       <ul>
-        <li><a href="#sec1">Manusの概要</a></li>
-<li><a href="#sec2">対象読者と活用方針</a></li>
-<li><a href="#sec3">各レベルの案内</a></li>
+        <li><a href="#sec1">Manusの基本概念</a></li>
+<li><a href="#sec2">自律型エージェントとしての特長</a></li>
+<li><a href="#sec3">業務システム開発・運用における位置づけ</a></li>
+<li><a href="#sec4">各レベルの学習ロードマップ</a></li>
 
       </ul>
     </nav>
 
     
-<h2 class="section-heading" id="sec1">Manusの概要</h2>
-<p>Manusチームが開発した汎用AIエージェント。サンドボックス環境内で、ブラウザ操作、シェルコマンドの実行、ファイル操作などを自律的に行い、ユーザーが与えた目標を達成する。</p>
+<h2 class="section-heading" id="sec1">Manusの基本概念</h2>
+<p>Manusは、単なるチャットAIではなく「自律型汎用AIエージェント」です。インターネットに接続されたサンドボックス環境（仮想マシン）を持ち、シェルコマンドの実行、ファイルの読み書き、ブラウザの操作、APIの呼び出しなどを自律的に組み合わせて、ユーザーから与えられたオープンエンドな目標を達成します。</p>
+<p>「コードを書いて」と指示するのではなく、「この仕様書に基づいてWebサイトを構築し、サーバーにデプロイして」と指示することで、必要なツールを自ら選び、エラーが出れば自己修正しながらタスクを完了させます。</p>
 <a href="#toc" class="back-to-toc">▲ 目次へ戻る</a>
 
-<h2 class="section-heading" id="sec2">対象読者と活用方針</h2>
-<p>単なるテキスト生成を超えて、「実際の作業」をAIに代行させたいエンジニア向け。Webからの情報収集や、特定の環境構築、データのスクレイピングと加工などを自動化する際に強力なツールとなる。</p>
-<a href="#toc" class="back-to-toc">▲ 目次へ戻る</a>
-
-<h2 class="section-heading" id="sec3">各レベルの案内</h2>
+<h2 class="section-heading" id="sec2">自律型エージェントとしての特長</h2>
 <ul>
-  <li><strong>初級編</strong>：基本的なタスク依頼、ブラウザ操作の自動化</li>
-  <li><strong>中級編</strong>：ファイル操作とデータ処理、スクリプトの作成と実行</li>
-  <li><strong>上級編</strong>：スキル拡張機構の活用、複雑な多段階タスクの設計</li>
+  <li><strong>Turing-completeな環境</strong>：Ubuntuベースのサンドボックス内で、Python、Node.js、シェルスクリプトなどを自由に実行可能。</li>
+  <li><strong>エージェントループ</strong>：計画立案 → ツール選択 → 実行 → 結果の観察 → 計画の修正、というループを自律的に回します。</li>
+  <li><strong>ブラウザ操作</strong>：Chromiumブラウザを制御し、ログインが必要なサイトの操作や、動的ページのスクレイピングが可能です。</li>
+  <li><strong>マルチモーダル</strong>：画像や動画、音声の生成・編集ツールを内包しています。</li>
+</ul>
+<a href="#toc" class="back-to-toc">▲ 目次へ戻る</a>
+
+<h2 class="section-heading" id="sec3">業務システム開発・運用における位置づけ</h2>
+<p>フリーランスエンジニアにとって、Manusは「非常に優秀だが、時折監視が必要なアシスタントエンジニア」として機能します。</p>
+<p>例えば、「AWSのS3バケットから先月分のログをダウンロードし、PythonのPandasで集計して、結果をグラフ化し、PDFのレポートにまとめて」といった、複数のツールとステップを跨ぐ「作業」を丸投げできます。これにより、開発者はアーキテクチャ設計や顧客折衝などの高付加価値な業務に専念できます。</p>
+<a href="#toc" class="back-to-toc">▲ 目次へ戻る</a>
+
+<h2 class="section-heading" id="sec4">各レベルの学習ロードマップ</h2>
+<ul>
+  <li><strong>初級編</strong>：Manusへの適切な指示（プロンプト）の出し方、得意なタスクと不得意なタスクの理解。</li>
+  <li><strong>中級編</strong>：サンドボックス環境の活用、スクレイピングやデータ分析の自動化、エラー発生時の介入方法。</li>
+  <li><strong>上級編</strong>：GitHub連携、Webアプリの自動構築（Scaffolding）、スケジュール実行（cron）の活用。</li>
 </ul>
 <a href="#toc" class="back-to-toc">▲ 目次へ戻る</a>
 

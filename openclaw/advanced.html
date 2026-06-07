@@ -217,19 +217,36 @@
     <nav id="toc">
       <h2>目次</h2>
       <ul>
-        <li><a href="#sec1">カスタムスキルの開発</a></li>
-<li><a href="#sec2">業務システムとのセキュアな連携</a></li>
+        <li><a href="#sec1">Milvusを用いたエンタープライズRAG</a></li>
+<li><a href="#sec2">マルチエージェント協調システム</a></li>
+<li><a href="#sec3">セキュリティとアクセス制御</a></li>
+<li><a href="#sec4">本番環境での運用設計</a></li>
 
       </ul>
     </nav>
 
     
-<h2 class="section-heading" id="sec1">カスタムスキルの開発</h2>
-<p>JavaScript/TypeScriptを用いて独自のツール（スキル）を開発し、OpenClawの機能を拡張する。例えば、社内データベースにクエリを発行するツールなど。</p>
+<h2 class="section-heading" id="sec1">Milvusを用いたエンタープライズRAG</h2>
+<p>社内の膨大なマニュアルや過去の障害対応履歴を、ベクトルデータベース（Milvusなど）に格納し、OpenClawと連携させます。これにより、エージェントは「知識」を持った状態で回答できるようになります。</p>
+<p>「エラーコード ORA-01555 が出たんだけど、過去にどう対応した？」という質問に対し、エージェントはMilvusを検索（Retrieval）し、過去の対応履歴を踏まえた具体的な解決策を生成（Generation）してチャットに返します。</p>
 <a href="#toc" class="back-to-toc">▲ 目次へ戻る</a>
 
-<h2 class="section-heading" id="sec2">業務システムとのセキュアな連携</h2>
-<p>VPNやプライベートネットワーク内でOpenClawを稼働させ、外部に公開できない業務システム（Oracle DBや社内ファイルサーバー）の操作を、認証されたメッセージングアカウントから安全に行う仕組みを構築する。</p>
+<h2 class="section-heading" id="sec2">マルチエージェント協調システム</h2>
+<p>単一のエージェントにすべてをやらせるのではなく、役割を分担した複数のエージェントを協調させます。</p>
+<ul>
+  <li><strong>リサーチャー・エージェント</strong>：Webから情報を集める。</li>
+  <li><strong>コーダー・エージェント</strong>：集めた情報からPythonスクリプトを書く。</li>
+  <li><strong>レビュアー・エージェント</strong>：書かれたコードをテストし、安全性を確認する。</li>
+</ul>
+<p>OpenClawのフレームワーク上でこれらのエージェントが互いに通信し、最終的な成果物だけをユーザー（Telegram）に届ける高度な自律システムを構築できます。</p>
+<a href="#toc" class="back-to-toc">▲ 目次へ戻る</a>
+
+<h2 class="section-heading" id="sec3">セキュリティとアクセス制御</h2>
+<p>チャット経由でDBの更新（DELETEやUPDATE）を許可するのは非常に危険です。業務システムに組み込む場合は、「Read Only」のツールと「Write」のツールを厳格に分け、Write系のツールを実行する前には必ずユーザー（Telegram上の特定のChat ID）に「実行してもよろしいですか？ (Yes/No)」の承認（Human-in-the-loop）を求めるフローを実装します。</p>
+<a href="#toc" class="back-to-toc">▲ 目次へ戻る</a>
+
+<h2 class="section-heading" id="sec4">本番環境での運用設計</h2>
+<p>エージェントが暴走して無限ループに陥る（API費用が枯渇する）のを防ぐため、<code>max_iterations</code>（最大思考回数）の設定や、1日あたりのAPIトークン消費量のアラート設定が必須です。また、エージェントの行動ログはすべて監査証跡として保存し、後から追跡できるように設計します。</p>
 <a href="#toc" class="back-to-toc">▲ 目次へ戻る</a>
 
   </main>

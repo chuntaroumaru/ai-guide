@@ -217,27 +217,38 @@
     <nav id="toc">
       <h2>目次</h2>
       <ul>
-        <li><a href="#sec1">OpenClawの概要</a></li>
-<li><a href="#sec2">対象読者と活用方針</a></li>
-<li><a href="#sec3">各レベルの案内</a></li>
+        <li><a href="#sec1">OpenClawとは</a></li>
+<li><a href="#sec2">他のAIエージェントとの違い</a></li>
+<li><a href="#sec3">業務システムにおける活用シナリオ</a></li>
+<li><a href="#sec4">各レベルの学習ロードマップ</a></li>
 
       </ul>
     </nav>
 
     
-<h2 class="section-heading" id="sec1">OpenClawの概要</h2>
-<p>オープンソースのローカルAIエージェントフレームワーク。WhatsAppやTelegramなどのメッセージングアプリをインターフェースとして、AIモデル（ローカルまたはクラウド）と通信し、様々な自動化タスクを実行する。</p>
+<h2 class="section-heading" id="sec1">OpenClawとは</h2>
+<p>OpenClaw（旧称：ClawDBot / MoltBot）は、オープンソースで開発されている自律型AIエージェントフレームワークです。最大の特長は、<strong>WhatsAppやTelegramなどのメッセージングアプリをインターフェースとして、自然言語で指示を出し、バックグラウンドで複雑なタスクを実行できる点</strong>にあります。</p>
+<p>内部的にはLangChainやLlamaIndexのアーキテクチャを拡張しており、Webスクレイピング、ファイル操作、データベースクエリ、スケジュール実行などの「ツール」を自律的に組み合わせて目標を達成します。</p>
 <a href="#toc" class="back-to-toc">▲ 目次へ戻る</a>
 
-<h2 class="section-heading" id="sec2">対象読者と活用方針</h2>
-<p>プライバシーを重視し、自前のサーバーやローカル環境でAIエージェントを稼働させたいエンジニア向け。日常的なコミュニケーションツールからサーバーの監視や定型業務の実行を指示したい場合に適している。</p>
-<a href="#toc" class="back-to-toc">▲ 目次へ戻る</a>
-
-<h2 class="section-heading" id="sec3">各レベルの案内</h2>
+<h2 class="section-heading" id="sec2">他のAIエージェントとの違い</h2>
+<p>ManusやChatGPT（Advanced Data Analysis）がクラウド上のサンドボックスで動作するのに対し、OpenClawは<strong>自社のローカルサーバーやVPSにデプロイして稼働させる</strong>ことができます。</p>
 <ul>
-  <li><strong>初級編</strong>：環境構築と基本設定、メッセージングアプリとの連携</li>
-  <li><strong>中級編</strong>：ローカルLLMの利用、スケジュール実行とWebスクレイピング</li>
-  <li><strong>上級編</strong>：カスタムスキルの開発、業務システムとのセキュアな連携</li>
+  <li><strong>データの秘匿性</strong>：社内の閉域網にあるデータベース（OracleやSQL Server）に直接接続し、社外にデータを出さずに集計や分析を行わせることが可能です。</li>
+  <li><strong>常駐型プロセス</strong>：デーモンとして常時稼働するため、cronライクなスケジュール実行や、特定のイベント（メール受信、DB更新）をトリガーとした自律処理が得意です。</li>
+</ul>
+<a href="#toc" class="back-to-toc">▲ 目次へ戻る</a>
+
+<h2 class="section-heading" id="sec3">業務システムにおける活用シナリオ</h2>
+<p>フリーランスエンジニアが、クライアント（病院など）の業務効率化のためにOpenClawを導入するシナリオが考えられます。</p>
+<p>例えば、「毎朝7時に、物流システムのSQL Serverから前日の欠品リストを抽出し、Excelにまとめて、担当者のTelegramに送信する」という一連の処理を、プログラムを組むことなく、自然言語の設定ファイルだけで実現できます。</p>
+<a href="#toc" class="back-to-toc">▲ 目次へ戻る</a>
+
+<h2 class="section-heading" id="sec4">各レベルの学習ロードマップ</h2>
+<ul>
+  <li><strong>初級編</strong>：ローカル環境へのデプロイ、Telegramボットとしての初期設定。</li>
+  <li><strong>中級編</strong>：カスタムツールの追加（DB接続、ファイル操作）、スクレイピングの自動化。</li>
+  <li><strong>上級編</strong>：ベクトルデータベース（Milvus等）との連携によるRAG構築、業務フローへの完全統合。</li>
 </ul>
 <a href="#toc" class="back-to-toc">▲ 目次へ戻る</a>
 

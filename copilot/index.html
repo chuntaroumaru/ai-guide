@@ -217,27 +217,38 @@
     <nav id="toc">
       <h2>目次</h2>
       <ul>
-        <li><a href="#sec1">GitHub Copilotの概要</a></li>
-<li><a href="#sec2">対象読者と活用方針</a></li>
-<li><a href="#sec3">各レベルの案内</a></li>
+        <li><a href="#sec1">GitHub Copilotの基本概念</a></li>
+<li><a href="#sec2">IDE統合のメリット</a></li>
+<li><a href="#sec3">業務システム開発での位置づけ</a></li>
+<li><a href="#sec4">各レベルの学習ロードマップ</a></li>
 
       </ul>
     </nav>
 
     
-<h2 class="section-heading" id="sec1">GitHub Copilotの概要</h2>
-<p>GitHubとMicrosoftが提供するAIペアプログラマー。VS CodeやVisual StudioなどのIDEに統合され、コードを記述する際に文脈に応じた補完や提案を行う。チャット機能やエージェントモードも搭載。</p>
+<h2 class="section-heading" id="sec1">GitHub Copilotの基本概念</h2>
+<p>GitHub Copilotは、OpenAIのモデル（GPT-4等）をベースにした、IDE（統合開発環境）向けAIペアプログラマーです。エディタ上でコードをタイピングしている最中に、文脈をリアルタイムに解析し、次に書くべきコードの行やブロック全体を提案（ゴーストテキストとして表示）します。</p>
+<p>単なるスニペットツールとは異なり、現在開いているファイルだけでなく、プロジェクト内の他のファイル（タブで開いているファイルなど）もコンテキストとして読み込むため、プロジェクト固有の変数名やメソッド名を正確に推論します。</p>
 <a href="#toc" class="back-to-toc">▲ 目次へ戻る</a>
 
-<h2 class="section-heading" id="sec2">対象読者と活用方針</h2>
-<p>日常的にIDE（特にVisual StudioやVS Code）を使用してC#やVB.NETのコーディングを行うエンジニアにとって必須のツール。定型コードの記述時間を大幅に削減し、ロジックの構築に集中できる。</p>
+<h2 class="section-heading" id="sec2">IDE統合のメリット</h2>
+<p>ブラウザベースのChatGPTと比較した最大の利点は「コンテキストスイッチの排除」です。コードをコピーしてブラウザに貼り付け、結果をまたIDEに戻す手間が不要になります。さらに、Visual StudioやVS CodeのCopilot Chat機能を使えば、エディタ内で直接「このメソッドのリファクタリング案を出して」「選択した範囲の単体テストを書いて」といった対話型指示が可能です。</p>
 <a href="#toc" class="back-to-toc">▲ 目次へ戻る</a>
 
-<h2 class="section-heading" id="sec3">各レベルの案内</h2>
+<h2 class="section-heading" id="sec3">業務システム開発での位置づけ</h2>
+<p>病院物流システムのような大規模で複雑な業務アプリケーション開発において、Copilotは「タイピング速度を劇的に向上させる強力なインテリセンス」として機能します。</p>
 <ul>
-  <li><strong>初級編</strong>：基本的なコード補完、コメントからのコード生成</li>
-  <li><strong>中級編</strong>：Copilot Chatの活用、テストコードの自動生成</li>
-  <li><strong>上級編</strong>：エージェントモードの活用、ワークスペース全体の理解と操作</li>
+  <li><strong>ボイラープレートの削減</strong>：DTOとEntity間のマッピングコードや、プロパティの羅列を自動補完します。</li>
+  <li><strong>命名規約の自動適用</strong>：既存のコード（<code>_camelCase</code> や <code>PascalCase</code>）のパターンを学習し、それに従った変数名を提案します。</li>
+  <li><strong>SQL Serverとの連携</strong>：C#のコード内に記述するインラインSQLやLINQクエリを、周囲のコンテキストから正確に推論します。</li>
+</ul>
+<a href="#toc" class="back-to-toc">▲ 目次へ戻る</a>
+
+<h2 class="section-heading" id="sec4">各レベルの学習ロードマップ</h2>
+<ul>
+  <li><strong>初級編</strong>：基本的なインライン補完の使い方、コメントからのコード生成、Copilot Chatの基本操作。</li>
+  <li><strong>中級編</strong>：Copilotに正しいコンテキストを読ませるためのタブ管理術、スラッシュコマンド（<code>/explain</code>, <code>/tests</code>）の活用。</li>
+  <li><strong>上級編</strong>：Copilot Workspaceの活用、大規模リファクタリング（VB.NETからC#への移行など）におけるプロジェクト全体の文脈共有。</li>
 </ul>
 <a href="#toc" class="back-to-toc">▲ 目次へ戻る</a>
 

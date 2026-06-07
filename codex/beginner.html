@@ -217,19 +217,53 @@
     <nav id="toc">
       <h2>目次</h2>
       <ul>
-        <li><a href="#sec1">インストールと基本的な使い方</a></li>
-<li><a href="#sec2">ターミナルでの操作方法</a></li>
+        <li><a href="#sec1">Codexへの指示の基本</a></li>
+<li><a href="#sec2">コメント駆動開発 (CDD)</a></li>
+<li><a href="#sec3">定型コードの生成</a></li>
+<li><a href="#sec4">SQLクエリの生成</a></li>
 
       </ul>
     </nav>
 
     
-<h2 class="section-heading" id="sec1">インストールと基本的な使い方</h2>
-<p>npmや特定のパッケージマネージャーを通じてCodex CLIをインストールする。APIキーを設定し、ターミナルからコマンドを実行して起動する。</p>
+<h2 class="section-heading" id="sec1">Codexへの指示の基本</h2>
+<p>Codex（コード生成特化モデル）に対しては、自然言語での指示をソースコードの「コメント」として記述する手法が効果的です。モデルはコメントに続く最適なコードを予測して出力します。</p>
 <a href="#toc" class="back-to-toc">▲ 目次へ戻る</a>
 
-<h2 class="section-heading" id="sec2">ターミナルでの操作方法</h2>
-<p>自然言語で「現在のディレクトリ内の.vbファイルをすべて検索し、特定の関数名を含むものをリストアップして」といった指示を与える。</p>
+<h2 class="section-heading" id="sec2">コメント駆動開発 (CDD)</h2>
+<p>実現したい処理のステップを、詳細なコメントとして先に記述します。</p>
+<pre><code>// C#
+// 1. 指定されたディレクトリ内のすべてのCSVファイルを取得する
+// 2. 各ファイルを読み込み、ヘッダー行をスキップする
+// 3. 2列目の値（金額）を合計する
+// 4. 合計値をコンソールに出力する
+// 5. 例外発生時はエラーメッセージをログに出力する
+public void CalculateTotalAmount(string directoryPath)
+{
+</code></pre>
+<p>このように具体的な手順を列挙することで、Codexは意図通りの堅牢なコードを生成しやすくなります。</p>
+<a href="#toc" class="back-to-toc">▲ 目次へ戻る</a>
+
+<h2 class="section-heading" id="sec3">定型コードの生成</h2>
+<p>クラスのプロパティ定義や、単純なマッピング処理など、手作業では面倒な定型コードの生成はCodexの独壇場です。</p>
+<pre><code>// 以下のSQLテーブル定義に対応するC#のEntity Framework Coreエンティティクラスを作成してください。
+// CREATE TABLE [dbo].[T_Patient] (
+//   [PatientId] INT IDENTITY(1,1) PRIMARY KEY,
+//   [PatientCode] VARCHAR(20) NOT NULL,
+//   [LastName] NVARCHAR(50) NOT NULL,
+//   [FirstName] NVARCHAR(50) NOT NULL,
+//   [BirthDate] DATE NOT NULL
+// );
+</code></pre>
+<a href="#toc" class="back-to-toc">▲ 目次へ戻る</a>
+
+<h2 class="section-heading" id="sec4">SQLクエリの生成</h2>
+<p>テーブルスキーマを提示した上で、自然言語で抽出条件を指示すると、正確なSQL（T-SQLやPL/SQL）を生成します。</p>
+<pre><code>-- テーブル: T_Orders (OrderId, PatientId, OrderDate, TotalAmount)
+-- テーブル: T_Patient (PatientId, PatientCode, LastName, FirstName)
+-- 指示: 2026年5月に注文があり、合計金額が50,000円を超える患者のPatientCodeと氏名を取得するクエリ。
+-- 注文金額の降順でソートすること。
+</code></pre>
 <a href="#toc" class="back-to-toc">▲ 目次へ戻る</a>
 
   </main>

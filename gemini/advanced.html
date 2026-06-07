@@ -217,19 +217,41 @@
     <nav id="toc">
       <h2>目次</h2>
       <ul>
-        <li><a href="#sec1">Gemini APIの活用</a></li>
-<li><a href="#sec2">カスタムAIアプリケーションの開発</a></li>
+        <li><a href="#sec1">Gemini API (Vertex AI) の業務統合</a></li>
+<li><a href="#sec2">Structured Outputs (JSON) の強制</a></li>
+<li><a href="#sec3">System Instructionsによるペルソナ制御</a></li>
+<li><a href="#sec4">RAGアーキテクチャの構築</a></li>
 
       </ul>
     </nav>
 
     
-<h2 class="section-heading" id="sec1">Gemini APIの活用</h2>
-<p>Gemini APIを使用して、自社システムに画像認識機能や高度な自然言語処理機能を組み込む。</p>
+<h2 class="section-heading" id="sec1">Gemini API (Vertex AI) の業務統合</h2>
+<p>エンタープライズ向けのシステム開発では、Google Cloudの「Vertex AI」経由でGemini APIを呼び出します。これにより、SLAの保証、エンタープライズレベルのデータプライバシー（学習への不使用）、VPC Service Controlsによるネットワーク制限など、業務システムに必須の要件を満たすことができます。</p>
+<pre><code>// C#からVertex AIのGemini 1.5 Proを呼び出す概念コード
+var client = new VertexAIClient("your-project-id", "asia-northeast1");
+var model = client.GenerativeModel("gemini-1.5-pro");
+var response = await model.GenerateContentAsync("物流システムの在庫予測アルゴリズムを提案して");
+</code></pre>
 <a href="#toc" class="back-to-toc">▲ 目次へ戻る</a>
 
-<h2 class="section-heading" id="sec2">カスタムAIアプリケーションの開発</h2>
-<p>Function Callingや構造化出力（JSON形式での出力）を活用し、業務システムと連携して動作する堅牢なAIアプリケーションを開発する。</p>
+<h2 class="section-heading" id="sec2">Structured Outputs (JSON) の強制</h2>
+<p>業務システムでAIの出力をプログラム（C#など）で処理する場合、出力フォーマットが厳密なJSONであることが求められます。Gemini APIでは <code>response_mime_type</code> を <code>application/json</code> に指定し、さらに <code>response_schema</code> でJSON Schemaを定義することで、確実にパース可能なJSONを出力させることができます。</p>
+<a href="#toc" class="back-to-toc">▲ 目次へ戻る</a>
+
+<h2 class="section-heading" id="sec3">System Instructionsによるペルソナ制御</h2>
+<p>API呼び出し時に <code>System Instructions</code> を設定することで、モデルの振る舞いや制約を根底から制御します。</p>
+<pre><code>あなたは35年の経験を持つ、病院物流システムに精通したシニアデータベースエンジニアです。
+- 回答は常に論理的で、客観的な事実に基づき、曖昧な推測は避けてください。
+- SQL Server (T-SQL) のパフォーマンスチューニングの観点を必ず含めてください。
+- 感情的な表現や過度な挨拶は不要です。
+</code></pre>
+<p>このように設定することで、ユーザー（フリーランスSE）の好みに完全に合致した、的確で無駄のないアシスタントをAPI経由で構築できます。</p>
+<a href="#toc" class="back-to-toc">▲ 目次へ戻る</a>
+
+<h2 class="section-heading" id="sec4">RAGアーキテクチャの構築</h2>
+<p>Geminiの巨大なコンテキストウィンドウ（2Mトークン）は、従来のRAG（Retrieval-Augmented Generation：ベクトル検索で関連箇所だけを抽出してLLMに渡す手法）の概念を変えつつあります。</p>
+<p>数万ページのドキュメントであれば、ベクトル検索（チャンク分割）を行わず、ドキュメント全体をそのままGeminiのコンテキストに放り込む「Long-Context RAG」というアプローチが可能です。これにより、文脈の分断（チャンク境界での情報の欠落）を防ぎ、より高精度な回答を得ることができます。Vertex AIでは、このアプローチを容易にするためのキャッシュ機能（Context Caching）も提供されています。</p>
 <a href="#toc" class="back-to-toc">▲ 目次へ戻る</a>
 
   </main>

@@ -217,19 +217,53 @@
     <nav id="toc">
       <h2>目次</h2>
       <ul>
-        <li><a href="#sec1">基本的な使い方</a></li>
-<li><a href="#sec2">長文ドキュメントの要約</a></li>
+        <li><a href="#sec1">XMLタグを用いたプロンプト設計</a></li>
+<li><a href="#sec2">長文ドキュメントの要約と抽出</a></li>
+<li><a href="#sec3">コードのレビューとリファクタリング</a></li>
+<li><a href="#sec4">ArtifactsによるUIの即時プレビュー</a></li>
 
       </ul>
     </nav>
 
     
-<h2 class="section-heading" id="sec1">基本的な使い方</h2>
-<p>Webインターフェースで自然言語による対話を行う。文章が自然で、ユーザーの意図を汲み取った丁寧な回答が得られる傾向がある。</p>
+<h2 class="section-heading" id="sec1">XMLタグを用いたプロンプト設計</h2>
+<p>Claudeはプロンプト内の構造を理解する能力に長けており、公式でも<strong>XMLタグ</strong>を用いたプロンプトの構造化が推奨されています。これにより、指示とデータ（ソースコードなど）を明確に分離できます。</p>
+<pre><code>以下のVB.NETのコードをC#に変換してください。
+
+&lt;instructions&gt;
+- Entity Framework Coreを使用すること
+- 変数名はcamelCaseとすること
+&lt;/instructions&gt;
+
+&lt;source_code&gt;
+Public Function GetPatient(ByVal id As Integer) As Patient
+    ' ... VB.NETのコード ...
+End Function
+&lt;/source_code&gt;
+</code></pre>
 <a href="#toc" class="back-to-toc">▲ 目次へ戻る</a>
 
-<h2 class="section-heading" id="sec2">長文ドキュメントの要約</h2>
-<p>数十ページに及ぶPDFの仕様書やマニュアルをアップロードし、要点の抽出や特定の条件に合致する情報の検索を行わせる。</p>
+<h2 class="section-heading" id="sec2">長文ドキュメントの要約と抽出</h2>
+<p>病院物流システムの数百ページに及ぶPDF仕様書をアップロードし、特定の情報だけを抽出させます。</p>
+<p><strong>プロンプト例：</strong></p>
+<pre><code>添付の要件定義書（PDF）を読み込み、以下のタスクを実行してください。
+
+1. 「滅菌材料の有効期限管理」に関する業務ルールを箇条書きで抽出してください。
+2. そのルールを実装する上で、データベース設計において考慮すべき点を3つ挙げてください。
+</code></pre>
+<a href="#toc" class="back-to-toc">▲ 目次へ戻る</a>
+
+<h2 class="section-heading" id="sec3">コードのレビューとリファクタリング</h2>
+<p>Claudeは「なぜそのように修正したか」の論理的な説明が非常に丁寧です。複雑なビジネスロジックを含むメソッドのレビューに適しています。</p>
+<pre><code>&lt;code&gt;タグ内のC#コードをレビューしてください。
+私はこのコードが「Solid原則」の「単一責任の原則 (SRP)」に違反していると考えていますが、
+具体的なリファクタリング案（クラスの分割案）を提示してください。
+</code></pre>
+<a href="#toc" class="back-to-toc">▲ 目次へ戻る</a>
+
+<h2 class="section-heading" id="sec4">ArtifactsによるUIの即時プレビュー</h2>
+<p>Claudeの強力な機能の一つが「Artifacts」です。HTML/CSS/JSやReactコンポーネントを生成させると、チャット画面の右側にプレビューが即座に表示されます。</p>
+<p>「病院の在庫管理ダッシュボードのUIモックアップをTailwind CSSで作って」と指示するだけで、動的なプロトタイプが完成し、設計の壁打ちが視覚的に行えます。</p>
 <a href="#toc" class="back-to-toc">▲ 目次へ戻る</a>
 
   </main>

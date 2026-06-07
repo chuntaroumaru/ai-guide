@@ -217,19 +217,46 @@
     <nav id="toc">
       <h2>目次</h2>
       <ul>
-        <li><a href="#sec1">コードベースの解析</a></li>
-<li><a href="#sec2">複雑な論理的推論</a></li>
+        <li><a href="#sec1">Projects機能によるコンテキスト共有</a></li>
+<li><a href="#sec2">巨大ログファイルの異常検知</a></li>
+<li><a href="#sec3">複雑なSQLの解析とチューニング</a></li>
+<li><a href="#sec4">システム移行計画の立案</a></li>
 
       </ul>
     </nav>
 
     
-<h2 class="section-heading" id="sec1">コードベースの解析</h2>
-<p>複数のソースコードファイル（例：VB.NETのクラスファイルと関連するSQLスクリプト）を同時に読み込ませ、システム間の依存関係やデータフローを可視化・解説させる。</p>
+<h2 class="section-heading" id="sec1">Projects機能によるコンテキスト共有</h2>
+<p>Claudeの「Projects」機能を使用すると、特定のプロジェクト専用のチャット環境を作成し、そこに「社内コーディング規約」「既存のデータベース定義書（DDL）」「アーキテクチャ設計書」などのファイルを「Knowledge」として永続的に登録しておけます。</p>
+<p>これにより、毎回プロンプトで前提条件を説明する手間が省け、「いつものDBのT_Patientテーブルに対するクエリを書いて」といった抽象的な指示で正確なコードが返ってくるようになります。</p>
 <a href="#toc" class="back-to-toc">▲ 目次へ戻る</a>
 
-<h2 class="section-heading" id="sec2">複雑な論理的推論</h2>
-<p>業務要件の矛盾点や、エッジケース（例外的な状況）におけるシステムの挙動について議論し、設計の穴を塞ぐ。</p>
+<h2 class="section-heading" id="sec2">巨大ログファイルの異常検知</h2>
+<p>数万行のIISアクセスログや、SQL ServerのError Logをテキストファイルとしてそのままアップロードし、解析させます。</p>
+<pre><code>添付のログファイルから、以下の条件に合致する異常を検知し、レポートを作成してください。
+
+&lt;conditions&gt;
+- HTTPステータス 500 が連続して発生している時間帯
+- 実行に3秒以上かかっている遅延リクエストのURLエンドポイントTop 5
+&lt;/conditions&gt;
+
+&lt;format&gt;
+結果はMarkdownのテーブル形式で出力してください。
+&lt;/format&gt;
+</code></pre>
+<a href="#toc" class="back-to-toc">▲ 目次へ戻る</a>
+
+<h2 class="section-heading" id="sec3">複雑なSQLの解析とチューニング</h2>
+<p>数百行に及ぶ、サブクエリとJOINが入り乱れたレガシーなストアドプロシージャの解読にClaudeは最適です。</p>
+<pre><code>以下のOracle PL/SQLのストアドプロシージャを解析してください。
+1. このプロシージャが最終的に何を取得・更新しようとしているか、業務的な意図を推測して要約してください。
+2. これをSQL ServerのT-SQLに移行する場合の書き換えコードを提示してください。
+3. その際、カーソル（CURSOR）処理をセットベース（Window関数など）の処理にリファクタリングしてください。
+</code></pre>
+<a href="#toc" class="back-to-toc">▲ 目次へ戻る</a>
+
+<h2 class="section-heading" id="sec4">システム移行計画の立案</h2>
+<p>現行システムの仕様と、移行先システムのアーキテクチャ方針を与え、WBS（Work Breakdown Structure）を伴う移行計画を立案させます。経験豊富なエンジニアの視点として、「どこにリスクが潜んでいるか」を重点的に指摘させます。</p>
 <a href="#toc" class="back-to-toc">▲ 目次へ戻る</a>
 
   </main>

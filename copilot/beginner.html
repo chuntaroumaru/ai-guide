@@ -217,19 +217,49 @@
     <nav id="toc">
       <h2>目次</h2>
       <ul>
-        <li><a href="#sec1">基本的なコード補完</a></li>
-<li><a href="#sec2">コメントからのコード生成</a></li>
+        <li><a href="#sec1">インライン補完の基本操作</a></li>
+<li><a href="#sec2">コメント駆動でのコード生成</a></li>
+<li><a href="#sec3">Copilot Chatの基本</a></li>
+<li><a href="#sec4">よくある落とし穴と対策</a></li>
 
       </ul>
     </nav>
 
     
-<h2 class="section-heading" id="sec1">基本的なコード補完</h2>
-<p>コードを入力し始めると、変数名やメソッド名、さらには関数全体のロジックを推測してグレーのテキストで提案が表示される。Tabキーで提案を受け入れる。</p>
+<h2 class="section-heading" id="sec1">インライン補完の基本操作</h2>
+<p>コードを入力していると、グレーの文字（ゴーストテキスト）で提案が表示されます。これがCopilotの基本機能です。</p>
+<ul>
+  <li><strong>提案を受け入れる</strong>：<code>Tab</code> キー</li>
+  <li><strong>単語単位で受け入れる</strong>：<code>Ctrl + RightArrow</code>（Windows）</li>
+  <li><strong>別の提案を見る</strong>：<code>Alt + ]</code> / <code>Alt + [</code></li>
+  <li><strong>提案を拒否する</strong>：そのままタイピングを続けるか、<code>Esc</code> キー</li>
+</ul>
+<p>関数名を入力した直後や、<code>if</code> 文の条件式を書こうとした瞬間に、最も効果的な提案が行われます。</p>
 <a href="#toc" class="back-to-toc">▲ 目次へ戻る</a>
 
-<h2 class="section-heading" id="sec2">コメントからのコード生成</h2>
-<p>実現したい処理をコメント（例：`// データベースから指定されたIDのユーザー情報を取得する`）として記述すると、それに続くコードが自動的に提案される。</p>
+<h2 class="section-heading" id="sec2">コメント駆動でのコード生成</h2>
+<p>実装したい処理をコメントとして記述し、改行すると、そのコメントの意図を汲み取ったコードブロックが提案されます。</p>
+<pre><code>// 指定されたPatientIdに紐づく、過去1年間の有効な処方箋履歴を取得し、日付の降順で返す
+public async Task&lt;List&lt;Prescription&gt;&gt; GetRecentPrescriptionsAsync(int patientId)
+{
+    // ← ここで改行して少し待つと、Entity Framework Coreを使ったLINQクエリが提案される
+</code></pre>
+<a href="#toc" class="back-to-toc">▲ 目次へ戻る</a>
+
+<h2 class="section-heading" id="sec3">Copilot Chatの基本</h2>
+<p>エディタのサイドバー、またはインライン（<code>Ctrl + I</code>）で開くチャットウィンドウです。コードを選択した状態で質問すると、そのコードをコンテキストとして回答してくれます。</p>
+<p><strong>活用例：</strong></p>
+<ul>
+  <li>複雑な正規表現を選択して「この正規表現が何をしているか解説して」</li>
+  <li>エラーが出ている行を選択して「このエラーの原因と修正案を教えて」</li>
+  <li>メソッドを選択して「この処理を非同期（async/await）に書き換えて」</li>
+</ul>
+<a href="#toc" class="back-to-toc">▲ 目次へ戻る</a>
+
+<h2 class="section-heading" id="sec4">よくある落とし穴と対策</h2>
+<div class="callout warning">
+  <strong>⚠️ Warning:</strong> Copilotは「もっともらしいコード」を提案しますが、それが「正しいコード」とは限りません。特に、存在しないライブラリのメソッドをでっち上げる（ハルシネーション）ことがあります。提案を受け入れた後は、必ずコンパイルエラーが出ないか、意図したロジックになっているかを目視で確認する癖をつけてください。
+</div>
 <a href="#toc" class="back-to-toc">▲ 目次へ戻る</a>
 
   </main>

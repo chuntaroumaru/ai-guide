@@ -217,24 +217,51 @@
     <nav id="toc">
       <h2>目次</h2>
       <ul>
-        <li><a href="#sec1">API連携・自動化</a></li>
-<li><a href="#sec2">エージェント活用</a></li>
-<li><a href="#sec3">業務システム開発への応用</a></li>
+        <li><a href="#sec1">OpenAI APIの業務システムへの統合</a></li>
+<li><a href="#sec2">Function Callingによるエージェント化</a></li>
+<li><a href="#sec3">RAGによる社内ナレッジベース構築</a></li>
+<li><a href="#sec4">構造化出力 (Structured Outputs) の活用</a></li>
 
       </ul>
     </nav>
 
     
-<h2 class="section-heading" id="sec1">API連携・自動化</h2>
-<p>OpenAI APIを利用し、自作の業務システムやツールにChatGPTの機能を組み込む。例えば、ログファイルの自動解析ツールや、ユーザーからの問い合わせに対する一次回答システムなどを構築する。</p>
+<h2 class="section-heading" id="sec1">OpenAI APIの業務システムへの統合</h2>
+<p>ChatGPTの真の価値は、WebブラウザのUIを離れ、APIを通じて自作の業務システムに組み込んだ時に発揮されます。C# (.NET) からOpenAI APIを呼び出す場合、公式の `OpenAI` NuGetパッケージ、またはAzure OpenAI Serviceを利用する場合は `Azure.AI.OpenAI` を使用します。</p>
+<pre><code>// C# 12 / .NET 8 での OpenAI API 呼び出し例
+using OpenAI.Chat;
+
+var client = new ChatClient("gpt-4o", Environment.GetEnvironmentVariable("OPENAI_API_KEY"));
+var messages = new List&lt;ChatMessage&gt;
+{
+    new SystemChatMessage("あなたは病院物流システムの専門家です。"),
+    new UserChatMessage("消費期限切れ間近の医療材料リストから、優先的に配置転換すべき品目を抽出してください。")
+};
+
+var response = await client.CompleteChatAsync(messages);
+Console.WriteLine(response.Value.Content[0].Text);
+</code></pre>
 <a href="#toc" class="back-to-toc">▲ 目次へ戻る</a>
 
-<h2 class="section-heading" id="sec2">エージェント活用</h2>
-<p>Function Calling機能を利用し、ChatGPTが外部APIやデータベース（OracleやSQL Serverなど）と連携して自律的にタスクを実行するエージェントを構築する。</p>
+<h2 class="section-heading" id="sec2">Function Callingによるエージェント化</h2>
+<p>Function Calling（関数呼び出し）機能を使用すると、LLMに「どの関数を、どのような引数で実行すべきか」を決定させることができます。これにより、LLMが自律的に社内データベースを検索したり、外部APIを叩いたりするエージェントを構築できます。</p>
+<p>例えば、「A病院の先月の注射器の消費量は？」という自然言語の質問に対し、LLMが `GetMonthlyConsumption(hospitalId: "A", itemCategory: "Syringe", month: "2026-05")` という関数を実行すべきと判断し、システム側でそのSQLを実行、結果をLLMに戻して最終的な自然言語の回答を生成させます。</p>
 <a href="#toc" class="back-to-toc">▲ 目次へ戻る</a>
 
-<h2 class="section-heading" id="sec3">業務システム開発への応用</h2>
-<p>大量のレガシーコード（VB6.0等）を解析し、仕様書を自動生成するスクリプトの作成や、テストデータ生成ツールの構築など、開発プロセス全体の効率化に活用する。</p>
+<h2 class="section-heading" id="sec3">RAGによる社内ナレッジベース構築</h2>
+<p>RAG (Retrieval-Augmented Generation) は、LLMが学習していない社内固有のデータ（過去の仕様書、障害報告書、マニュアルなど）を回答に組み込むためのアーキテクチャです。</p>
+<ol>
+  <li>社内ドキュメントをテキスト化し、Embedding APIを用いてベクトル（数値の配列）に変換する。</li>
+  <li>ベクトルデータベース（Pinecone, Qdrant, または SQL Server 2022のベクトル検索機能など）に保存する。</li>
+  <li>ユーザーの質問もベクトル化し、類似度の高いドキュメントをデータベースから検索（Retrieval）する。</li>
+  <li>検索されたドキュメントをコンテキストとしてプロンプトに埋め込み、LLMに回答を生成（Generation）させる。</li>
+</ol>
+<p>これにより、幻覚（ハルシネーション）を抑えつつ、社内事情に精通したAIアシスタントを構築できます。</p>
+<a href="#toc" class="back-to-toc">▲ 目次へ戻る</a>
+
+<h2 class="section-heading" id="sec4">構造化出力 (Structured Outputs) の活用</h2>
+<p>業務システムでLLMの出力をプログラムで処理する場合、出力が厳密なJSONフォーマットであることが求められます。OpenAI APIの <code>response_format</code> で JSON Schema を定義することで、100%スキーマに合致したJSON出力を保証させることができます。</p>
+<p>これにより、非構造化データ（長文のテキストやPDF）から、システムに取り込み可能な構造化データ（C#のクラスにデシリアライズ可能なJSON）への変換処理を、極めて高い信頼性で自動化できます。</p>
 <a href="#toc" class="back-to-toc">▲ 目次へ戻る</a>
 
   </main>

@@ -217,27 +217,56 @@
     <nav id="toc">
       <h2>目次</h2>
       <ul>
-        <li><a href="#sec1">Claudeの概要</a></li>
-<li><a href="#sec2">対象読者と活用方針</a></li>
-<li><a href="#sec3">各レベルの案内</a></li>
+        <li><a href="#sec1">Claudeの基本アーキテクチャと特徴</a></li>
+<li><a href="#sec2">ChatGPTとの違い・使い分け</a></li>
+<li><a href="#sec3">業務システム開発における位置づけ</a></li>
+<li><a href="#sec4">各レベルの学習ロードマップ</a></li>
 
       </ul>
     </nav>
 
     
-<h2 class="section-heading" id="sec1">Claudeの概要</h2>
-<p>Anthropicが提供する対話型AI。長大なコンテキストウィンドウ（大量のテキストを一度に処理できる能力）を持ち、コードの理解や論理的な推論に優れている。安全性を重視した設計が特徴。</p>
+<h2 class="section-heading" id="sec1">Claudeの基本アーキテクチャと特徴</h2>
+<p>Anthropic社が開発したClaude（クロード）シリーズ（Claude 3.5 Sonnet / Opus など）は、特に<strong>長文コンテキストの処理能力</strong>と<strong>論理的で洗練された日本語の出力</strong>において高い評価を得ている大規模言語モデルです。</p>
+<p>一度に処理できるトークン数（コンテキストウィンドウ）が非常に大きく、数百ページに及ぶ要件定義書や、数十個のソースコードファイルを丸ごと読み込ませて、その全体像を踏まえた上で回答させることが可能です。</p>
 <a href="#toc" class="back-to-toc">▲ 目次へ戻る</a>
 
-<h2 class="section-heading" id="sec2">対象読者と活用方針</h2>
-<p>長大な仕様書やログファイル、レガシーシステムのソースコード群を一括で解析させたい場合に非常に有効。表面的な回答ではなく、深い論理的考察を求めるエンジニアに適している。</p>
+<h2 class="section-heading" id="sec2">ChatGPTとの違い・使い分け</h2>
+<p>エンジニア視点での使い分けは以下のようになります。</p>
+<table>
+  <tr>
+    <th>比較軸</th>
+    <th>Claude 3.5 Sonnet / Opus</th>
+    <th>ChatGPT (GPT-4o / o3)</th>
+  </tr>
+  <tr>
+    <td><strong>長文処理</strong></td>
+    <td>◎ 巨大なログやソースコード群を丸投げしての全体解析が得意。情報の取りこぼしが少ない。</td>
+    <td>〇 コンテキストが長すぎると、途中の中間情報を無視する傾向がある（Lost in the middle現象）。</td>
+  </tr>
+  <tr>
+    <td><strong>コーディング</strong></td>
+    <td>◎ 堅牢でバグの少ない、洗練されたコードを出力する。特にフロントエンド（React/Vue）のUI生成に強い（Artifacts機能）。</td>
+    <td>◎ 複雑なアルゴリズムやSQLの推論（o3モデル）においては依然としてトップクラス。</td>
+  </tr>
+  <tr>
+    <td><strong>文章のトーン</strong></td>
+    <td>◎ 人間らしく、自然で論理的な日本語。ドキュメント作成に最適。</td>
+    <td>〇 翻訳調やAI特有の「AI構文」になりがち。</td>
+  </tr>
+</table>
 <a href="#toc" class="back-to-toc">▲ 目次へ戻る</a>
 
-<h2 class="section-heading" id="sec3">各レベルの案内</h2>
+<h2 class="section-heading" id="sec3">業務システム開発における位置づけ</h2>
+<p>35年の経験を持つエンジニアにとって、Claudeは「巨大なレガシーシステムの全容把握」と「設計ドキュメントの自動生成」における最強のパートナーです。</p>
+<p>VB6.0のプロジェクト全体（数十個の .frm や .bas ファイル）をZipで固めてアップロードし、「このシステムの業務フローを解析し、PlantUMLでシーケンス図を出力して」といった離れ業が可能です。</p>
+<a href="#toc" class="back-to-toc">▲ 目次へ戻る</a>
+
+<h2 class="section-heading" id="sec4">各レベルの学習ロードマップ</h2>
 <ul>
-  <li><strong>初級編</strong>：基本的な使い方、長文ドキュメントの要約</li>
-  <li><strong>中級編</strong>：コードベースの解析、複雑な論理的推論</li>
-  <li><strong>上級編</strong>：API連携、システム移行の全体計画立案</li>
+  <li><strong>初級編</strong>：Claudeの基本的な使い方、長文プロンプトの記述方法（XMLタグの活用）。</li>
+  <li><strong>中級編</strong>：Projects機能を用いた社内ナレッジの共有、Artifactsを用いたUIプロトタイピング。</li>
+  <li><strong>上級編</strong>：Claude API (Anthropic API) のシステム統合、Prompt Cachingによるコストとレイテンシの最適化。</li>
 </ul>
 <a href="#toc" class="back-to-toc">▲ 目次へ戻る</a>
 

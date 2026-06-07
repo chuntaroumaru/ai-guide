@@ -217,19 +217,46 @@
     <nav id="toc">
       <h2>目次</h2>
       <ul>
-        <li><a href="#sec1">環境構築と基本設定</a></li>
+        <li><a href="#sec1">環境構築とデプロイ</a></li>
 <li><a href="#sec2">メッセージングアプリとの連携</a></li>
+<li><a href="#sec3">基本的なコマンドと対話</a></li>
+<li><a href="#sec4">ログの確認とトラブルシューティング</a></li>
 
       </ul>
     </nav>
 
     
-<h2 class="section-heading" id="sec1">環境構築と基本設定</h2>
-<p>Node.js環境でのインストール、ゲートウェイの設定、使用するAIモデル（OpenAI APIなど）の設定を行う。</p>
+<h2 class="section-heading" id="sec1">環境構築とデプロイ</h2>
+<p>OpenClawはPythonベースのフレームワークです。Dockerを使用するのが最も簡単です。</p>
+<pre><code># docker-compose.yml の例
+version: '3.8'
+services:
+  openclaw:
+    image: openclaw/core:latest
+    environment:
+      - OPENAI_API_KEY=sk-...
+      - TELEGRAM_BOT_TOKEN=123456:ABC-DEF1234...
+    volumes:
+      - ./data:/app/data
+</code></pre>
+<p><code>docker-compose up -d</code> で起動すると、設定したTelegramのボットトークン経由でアクセス可能になります。</p>
 <a href="#toc" class="back-to-toc">▲ 目次へ戻る</a>
 
 <h2 class="section-heading" id="sec2">メッセージングアプリとの連携</h2>
-<p>TelegramやWhatsAppなどのBotトークンを設定し、スマートフォンからOpenClawエージェントと対話できる環境を構築する。</p>
+<p>TelegramでBotFatherからボットを作成し、取得したトークンを環境変数にセットするだけで、スマホからエージェントに指示を出せるようになります。移動中や出先から「現在のDBサーバーのCPU使用率を確認して」といった指示が可能になります。</p>
+<a href="#toc" class="back-to-toc">▲ 目次へ戻る</a>
+
+<h2 class="section-heading" id="sec3">基本的なコマンドと対話</h2>
+<p>チャット画面から直接自然言語で指示を出します。</p>
+<ul>
+  <li>「今日のIT系ニュースをスクレイピングして要約して」</li>
+  <li>「/data ディレクトリにある <code>sales.csv</code> を読み込んで、売上の合計を計算して」</li>
+</ul>
+<p>OpenClawは利用可能なツール（Web Search, File Reader, Python REPL等）を自律的に選択し、結果をチャットに返します。</p>
+<a href="#toc" class="back-to-toc">▲ 目次へ戻る</a>
+
+<h2 class="section-heading" id="sec4">ログの確認とトラブルシューティング</h2>
+<p>エージェントが「何を考えてどのツールを選択したか」の思考プロセス（Chain of Thought）は、Dockerのログに出力されます。意図しない動作をした場合は、<code>docker logs openclaw</code> を確認し、プロンプトの曖昧さを修正します。</p>
 <a href="#toc" class="back-to-toc">▲ 目次へ戻る</a>
 
   </main>
