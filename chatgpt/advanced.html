@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ChatGPT 上級編 — AIツール使いこなし指南</title>
+  <style>
+  :root {
+    --bg: #f8f9fa;
+    --bg-card: #ffffff;
+    --text: #212529;
+    --text-muted: #6c757d;
+    --border: #dee2e6;
+    --accent: #0d6efd;
+    --accent-hover: #0b5ed7;
+    --badge-beginner: #198754;
+    --badge-intermediate: #fd7e14;
+    --badge-advanced: #dc3545;
+    --shadow: 0 2px 8px rgba(0,0,0,0.08);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #1a1d23;
+      --bg-card: #252830;
+      --text: #e9ecef;
+      --text-muted: #adb5bd;
+      --border: #3d4147;
+      --accent: #4d94ff;
+      --accent-hover: #6ba3ff;
+      --shadow: 0 2px 8px rgba(0,0,0,0.4);
+    }
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, "Yu Gothic", sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.8;
+    font-size: 16px;
+  }
+  header {
+    background: var(--bg-card);
+    border-bottom: 1px solid var(--border);
+    padding: 20px 32px;
+    box-shadow: var(--shadow);
+  }
+  header .breadcrumb {
+    font-size: 0.82rem;
+    color: var(--text-muted);
+    margin-bottom: 6px;
+  }
+  header .breadcrumb a { color: var(--accent); text-decoration: none; }
+  header .breadcrumb a:hover { text-decoration: underline; }
+  header h1 { font-size: 1.5rem; font-weight: 700; }
+  header .subtitle { font-size: 0.88rem; color: var(--text-muted); margin-top: 4px; }
+  .badge {
+    display: inline-block;
+    font-size: 0.72rem;
+    font-weight: 700;
+    padding: 3px 10px;
+    border-radius: 4px;
+    color: #fff;
+    margin-left: 10px;
+    vertical-align: middle;
+    letter-spacing: 0.03em;
+  }
+  .badge-beginner { background: #198754; }
+  .badge-intermediate { background: #fd7e14; }
+  .badge-advanced { background: #dc3545; }
+  .badge-overview { background: #0d6efd; }
+  main {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 40px 24px;
+  }
+  #toc {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 20px 24px;
+    margin-bottom: 40px;
+  }
+  #toc h2 {
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-bottom: 10px;
+  }
+  #toc ul { list-style: none; }
+  #toc ul li { margin: 4px 0; }
+  #toc ul li a { color: var(--accent); text-decoration: none; font-size: 0.92rem; }
+  #toc ul li a:hover { text-decoration: underline; }
+  h2.section-heading {
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin: 40px 0 16px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid var(--border);
+    scroll-margin-top: 16px;
+  }
+  h3.sub-heading {
+    font-size: 1.05rem;
+    font-weight: 700;
+    margin: 24px 0 10px;
+    scroll-margin-top: 16px;
+  }
+  p { margin-bottom: 14px; }
+  ul, ol { margin: 0 0 14px 24px; }
+  li { margin-bottom: 6px; }
+  code {
+    font-family: "Consolas", "Courier New", monospace;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 3px;
+    padding: 1px 5px;
+    font-size: 0.88em;
+  }
+  pre {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 16px 18px;
+    overflow-x: auto;
+    margin-bottom: 16px;
+    font-size: 0.87em;
+    line-height: 1.6;
+  }
+  pre code { background: none; border: none; padding: 0; font-size: inherit; }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 16px;
+    font-size: 0.9em;
+  }
+  th, td {
+    border: 1px solid var(--border);
+    padding: 8px 12px;
+    text-align: left;
+  }
+  th { background: var(--bg-card); font-weight: 700; }
+  .back-to-toc {
+    display: inline-block;
+    margin-top: 16px;
+    font-size: 0.82rem;
+    color: var(--accent);
+    text-decoration: none;
+  }
+  .back-to-toc:hover { text-decoration: underline; }
+  .level-nav {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 32px;
+  }
+  .level-nav a {
+    display: inline-block;
+    padding: 6px 16px;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-decoration: none;
+    color: #fff;
+    transition: opacity 0.15s;
+  }
+  .level-nav a:hover { opacity: 0.85; }
+  .btn-overview { background: #0d6efd; }
+  .btn-beginner { background: #198754; }
+  .btn-intermediate { background: #fd7e14; }
+  .btn-advanced { background: #dc3545; }
+  .callout {
+    background: var(--bg-card);
+    border-left: 4px solid var(--accent);
+    border-radius: 0 6px 6px 0;
+    padding: 14px 18px;
+    margin-bottom: 16px;
+    font-size: 0.92rem;
+  }
+  .callout.tip { border-color: #198754; }
+  .callout.warning { border-color: #fd7e14; }
+  .callout.danger { border-color: #dc3545; }
+  footer {
+    text-align: center;
+    padding: 24px;
+    color: var(--text-muted);
+    font-size: 0.82rem;
+    border-top: 1px solid var(--border);
+    margin-top: 48px;
+  }
+  footer a { color: var(--accent); text-decoration: none; }
+  footer a:hover { text-decoration: underline; }
+  @media (max-width: 600px) {
+    header { padding: 14px 16px; }
+    main { padding: 24px 16px; }
+  }
+</style>
+</head>
+<body>
+  <header>
+    <div class="breadcrumb">
+      <a href="../index.html">← ツール一覧へ戻る</a>
+    </div>
+    <h1>ChatGPT <span class="badge badge-advanced">上級編</span></h1>
+    <p class="subtitle">フリーランスSE向け実践リファレンス</p>
+  </header>
+
+  <main>
+    <div class="level-nav">
+      <a href="index.html" class="btn-overview">概要</a>
+<a href="beginner.html" class="btn-beginner">初級編</a>
+<a href="intermediate.html" class="btn-intermediate">中級編</a>
+<a href="advanced.html" class="btn-advanced" style="box-shadow: 0 0 0 2px var(--text);">上級編</a>
+
+    </div>
+
+    <nav id="toc">
+      <h2>目次</h2>
+      <ul>
+        <li><a href="#sec1">API連携・自動化</a></li>
+<li><a href="#sec2">エージェント活用</a></li>
+<li><a href="#sec3">業務システム開発への応用</a></li>
+
+      </ul>
+    </nav>
+
+    
+<h2 class="section-heading" id="sec1">API連携・自動化</h2>
+<p>OpenAI APIを利用し、自作の業務システムやツールにChatGPTの機能を組み込む。例えば、ログファイルの自動解析ツールや、ユーザーからの問い合わせに対する一次回答システムなどを構築する。</p>
+<a href="#toc" class="back-to-toc">▲ 目次へ戻る</a>
+
+<h2 class="section-heading" id="sec2">エージェント活用</h2>
+<p>Function Calling機能を利用し、ChatGPTが外部APIやデータベース（OracleやSQL Serverなど）と連携して自律的にタスクを実行するエージェントを構築する。</p>
+<a href="#toc" class="back-to-toc">▲ 目次へ戻る</a>
+
+<h2 class="section-heading" id="sec3">業務システム開発への応用</h2>
+<p>大量のレガシーコード（VB6.0等）を解析し、仕様書を自動生成するスクリプトの作成や、テストデータ生成ツールの構築など、開発プロセス全体の効率化に活用する。</p>
+<a href="#toc" class="back-to-toc">▲ 目次へ戻る</a>
+
+  </main>
+
+  <footer>
+    <p><a href="../index.html">← ツール一覧へ戻る</a></p>
+    <p style="margin-top:8px;">最終更新：2026年06月08日</p>
+  </footer>
+</body>
+</html>
